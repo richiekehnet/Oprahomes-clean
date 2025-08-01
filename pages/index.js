@@ -3,13 +3,28 @@ import { FaTiktok } from 'react-icons/fa';
 export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white font-sans">
-      {/* 🔹 Hero Section */}
-      <section className="text-center py-20 px-6 md:px-20">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">
-          Where Calgary’s Finest Homes Meet Cinematic Marketing
+      {/* 🔥 Hero Section with Cinematic Video */}
+      <section className="relative h-[90vh] w-full overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute w-full h-full object-cover z-0"
+        >
+          <source src="/hero-reel.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <div className="relative z-10 flex flex-col justify-center items-center text-center h-full bg-black/50 px-6">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+            Where Calgary’s Finest Homes Meet Cinematic Marketing
         </h1>
-        <p className="text-gray-400 text-lg">Oprahomes | Realtor & Videographer</p>
-      </section>
+        <p className="text-gray-200 text-lg md:text-xl drop-shadow">
+          Oprahomes | Realtor & Videographer
+        </p>
+      </div>
+    </section>
 
       {/* 🔹 Instagram Teaser */}
       <section className="py-20 px-6 md:px-20 bg-neutral-800 text-white text-center">
