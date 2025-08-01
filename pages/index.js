@@ -35,6 +35,30 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 🔹 Our Services */}
+      <section className="py-20 px-6 md:px-20 bg-black text-white text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Services</h2>
+        <p className="text-gray-400 mb-12 max-w-xl mx-auto">
+          Providing cinematic solutions for Calgary’s premium real estate market.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {[
+            { title: "Real Estate Videography", emoji: "🎥" },
+            { title: "Buying & Selling Homes", emoji: "🏡" },
+            { title: "Drone & Aerial Tracking", emoji: "🚁" },
+            { title: "Branding for Realtors", emoji: "📸" }
+          ].map((service, index) => (
+            <div
+              key={index}
+              className="bg-neutral-900 p-6 rounded-lg hover:scale-105 transition-transform duration-300 border border-gray-800"
+          >
+            <div className="text-4xl mb-4">{service.emoji}</div>
+            <h3 className="text-xl font-semibold">{service.title}</h3>
+          </div>
+        ))}
+      </div>
+    </section>
+
       {/* 🔹 Contact Form */}
       <section className="py-20 px-6 md:px-20 bg-neutral-900 text-white text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Work With Oprahomes</h2>
