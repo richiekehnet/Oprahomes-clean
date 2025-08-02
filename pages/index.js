@@ -14,12 +14,13 @@ export default function Home() {
         </nav>
       </header>
 
-      {/* 🔥 Hero Section with Responsive YouTube Video */}
+      {/* 🔥 Hero Section with Responsive YouTube Videos */}
       <section className="relative w-full overflow-hidden pt-20 h-[100vh]">
-        <div className="absolute inset-0 w-full h-full z-0">
+        {/* Portrait Video for Mobile Devices */}
+        <div className="block sm:hidden absolute inset-0 w-full h-full z-0">
           <iframe
             src="https://www.youtube.com/embed/Yn_Rdl2t0Qs?autoplay=1&mute=1&loop=1&playlist=Yn_Rdl2t0Qs&controls=0&showinfo=0&modestbranding=1"
-            title="Hero Reel"
+            title="Hero Reel Mobile"
             frameBorder="0"
             allow="autoplay; fullscreen"
             allowFullScreen
@@ -27,7 +28,19 @@ export default function Home() {
           ></iframe>
         </div>
 
-        {/* Overlayed hero text */}
+        {/* Landscape Video for Desktop and Tablets */}
+        <div className="hidden sm:block absolute inset-0 w-full h-full z-0">
+          <iframe
+            src="https://www.youtube.com/embed/qpkg_Anh_vI?autoplay=1&mute=1&loop=1&playlist=qpkg_Anh_vI&controls=0&showinfo=0&modestbranding=1"
+            title="Hero Reel Desktop"
+            frameBorder="0"
+            allow="autoplay; fullscreen"
+            allowFullScreen
+            className="w-full h-full object-cover"
+          ></iframe>
+        </div>
+
+        {/* Overlayed Hero Text */}
         <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center px-6">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
             Where Calgary’s Finest Homes Meet Cinematic Marketing
