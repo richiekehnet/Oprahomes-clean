@@ -4,16 +4,28 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white font-sans">
 
-      {/* 🔥 Hero Section with Embedded YouTube Video */}
-      <section className="relative h-[90vh] w-full overflow-hidden">
-        <iframe
-          src="https://www.youtube.com/embed/qpkg_Anh_vI?autoplay=1&mute=1&loop=1&playlist=qpkg_Anh_vI&controls=0&showinfo=0&modestbranding=1"
-          title="Hero Reel"
-          frameBorder="0"
-          allow="autoplay; fullscreen"
-          allowFullScreen
-          className="absolute w-full h-full object-cover z-0"
-        ></iframe>
+      {/* 🔼 Header */}
+      <header className="fixed top-0 w-full bg-white text-black z-50 shadow-md py-4 px-6 flex justify-between items-center">
+        <h1 className="font-bold text-xl">Oprahomes</h1>
+        <nav className="space-x-4 text-sm md:text-base">
+          <a href="#services" className="hover:underline">Services</a>
+          <a href="#contact" className="hover:underline">Contact</a>
+          <a href="https://www.instagram.com/oprahomes" target="_blank" rel="noopener noreferrer" className="hover:underline">Instagram</a>
+        </nav>
+      </header>
+
+      {/* 🔥 Hero Section with Responsive YouTube Video */}
+      <section className="relative h-screen w-full overflow-hidden pt-20"> {/* pt-20 offsets header height */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <iframe
+            src="https://www.youtube.com/embed/Yn_Rdl2t0Qs?autoplay=1&mute=1&loop=1&playlist=Yn_Rdl2t0Qs&controls=0&showinfo=0&modestbranding=1"
+            title="Hero Reel"
+            frameBorder="0"
+            allow="autoplay; fullscreen"
+            allowFullScreen
+            className="w-full h-full aspect-video object-cover"
+          ></iframe>
+        </div>
 
         {/* Overlayed hero text */}
         <div className="relative z-10 flex flex-col justify-center items-center text-center h-full bg-black/50 px-6">
@@ -51,7 +63,7 @@ export default function Home() {
       </section>
 
       {/* 🔹 Our Services Section */}
-      <section className="py-20 px-6 md:px-20 bg-black text-white text-center">
+      <section id="services" className="py-20 px-6 md:px-20 bg-black text-white text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Services</h2>
         <p className="text-gray-400 mb-12 max-w-xl mx-auto">
           Providing cinematic solutions for Calgary’s premium real estate market.
@@ -75,7 +87,7 @@ export default function Home() {
       </section>
 
       {/* 🔹 Contact Form Section */}
-      <section className="py-20 px-6 md:px-20 bg-neutral-900 text-white text-center">
+      <section id="contact" className="py-20 px-6 md:px-20 bg-neutral-900 text-white text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Work With Oprahomes</h2>
         <p className="text-gray-400 mb-10 max-w-xl mx-auto">
           Whether you’re a realtor, buyer, seller, or developer — we’d love to hear from you.
