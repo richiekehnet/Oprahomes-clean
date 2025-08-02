@@ -59,7 +59,7 @@ export default function Home() {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            "https://www.instagram.com/reel/Cy9ciKfpLjO/embed",
+            "https://www.instagram.com/reel/DMZ5P5_uXEJ/embed",
             "https://www.instagram.com/reel/Cy9c2kqJWtv/embed",
             "https://www.instagram.com/reel/Cy9d3rfpPOp/embed",
             "https://www.instagram.com/reel/Cy9e4lMNpKk/embed"
