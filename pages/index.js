@@ -2,7 +2,7 @@ import { FaTiktok } from 'react-icons/fa';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black text-white font-sans">
+    <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden">
 
       {/* 🔼 Header */}
       <header className="fixed top-0 w-full bg-white text-black z-50 shadow-md py-4 px-6 flex justify-between items-center">
@@ -15,16 +15,18 @@ export default function Home() {
       </header>
 
       {/* 🔥 Hero Section with Responsive YouTube Video */}
-      <section className="relative h-screen w-full overflow-hidden pt-20"> {/* pt-20 offsets header height */}
+      <section className="relative w-full overflow-hidden pt-20 aspect-video sm:aspect-[16/9] md:h-screen">
         <div className="absolute inset-0 w-full h-full z-0">
-          <iframe
-            src="https://www.youtube.com/embed/qpkg_Anh_vI?autoplay=1&mute=1&loop=1&playlist=qpkg_Anh_vI&controls=0&showinfo=0&modestbranding=1"
-            title="Hero Reel"
-            frameBorder="0"
-            allow="autoplay; fullscreen"
-            allowFullScreen
-            className="w-full h-full aspect-video object-cover"
-          ></iframe>
+          <div className="w-full h-full">
+            <iframe
+              src="https://www.youtube.com/embed/Yn_Rdl2t0Qs?autoplay=1&mute=1&loop=1&playlist=Yn_Rdl2t0Qs&controls=0&showinfo=0&modestbranding=1"
+              title="Hero Reel"
+              frameBorder="0"
+              allow="autoplay; fullscreen"
+              allowFullScreen
+              className="w-full h-full object-cover"
+            ></iframe>
+          </div>
         </div>
 
         {/* Overlayed hero text */}
