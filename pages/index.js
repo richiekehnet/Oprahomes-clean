@@ -2,7 +2,7 @@ import { FaTiktok } from 'react-icons/fa';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-white text-black font-sans overflow-x-hidden">
 
       {/* 🔼 Header */}
       <header className="fixed top-0 w-full bg-white text-black z-50 shadow-md py-4 px-6 flex justify-between items-center">
@@ -52,9 +52,9 @@ export default function Home() {
       </section>
 
       {/* 🔹 Instagram Teaser Section */}
-      <section className="py-20 px-6 md:px-20 bg-neutral-800 text-white text-center">
+      <section className="py-20 px-6 md:px-20 bg-neutral-100 text-black text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Follow Us on Instagram</h2>
-        <p className="text-gray-400 mb-10 max-w-xl mx-auto">
+        <p className="text-gray-600 mb-10 max-w-xl mx-auto">
           Behind the scenes, aerial reels, and the finest homes in Calgary.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -76,9 +76,9 @@ export default function Home() {
       </section>
 
       {/* 🔹 Our Services Section */}
-      <section id="services" className="py-20 px-6 md:px-20 bg-black text-white text-center">
+      <section id="services" className="py-20 px-6 md:px-20 bg-white text-black text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Services</h2>
-        <p className="text-gray-400 mb-12 max-w-xl mx-auto">
+        <p className="text-gray-600 mb-12 max-w-xl mx-auto">
           Providing cinematic solutions for Calgary’s premium real estate market.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -90,7 +90,7 @@ export default function Home() {
           ].map((service, index) => (
             <div
               key={index}
-              className="bg-neutral-900 p-6 rounded-lg hover:scale-105 transition-transform duration-300 border border-gray-800"
+              className="bg-neutral-100 p-6 rounded-lg hover:scale-105 transition-transform duration-300 border border-gray-200"
             >
               <div className="text-4xl mb-4">{service.emoji}</div>
               <h3 className="text-xl font-semibold">{service.title}</h3>
@@ -100,9 +100,9 @@ export default function Home() {
       </section>
 
       {/* 🔹 Contact Form Section */}
-      <section id="contact" className="py-20 px-6 md:px-20 bg-neutral-900 text-white text-center">
+      <section id="contact" className="py-20 px-6 md:px-20 bg-neutral-100 text-black text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Work With Oprahomes</h2>
-        <p className="text-gray-400 mb-10 max-w-xl mx-auto">
+        <p className="text-gray-600 mb-10 max-w-xl mx-auto">
           Whether you’re a realtor, buyer, seller, or developer — we’d love to hear from you.
         </p>
         <form
@@ -115,32 +115,32 @@ export default function Home() {
             name="name"
             placeholder="Your Name"
             required
-            className="w-full p-3 rounded bg-black border border-gray-700 text-white"
+            className="w-full p-3 rounded bg-white border border-gray-300 text-black"
           />
           <input
             type="email"
             name="email"
             placeholder="Your Email"
             required
-            className="w-full p-3 rounded bg-black border border-gray-700 text-white"
+            className="w-full p-3 rounded bg-white border border-gray-300 text-black"
           />
           <input
             type="tel"
             name="phone"
             placeholder="Your Phone Number"
             required
-            className="w-full p-3 rounded bg-black border border-gray-700 text-white"
+            className="w-full p-3 rounded bg-white border border-gray-300 text-black"
           />
           <textarea
             name="message"
             placeholder="Tell us how we can help..."
             required
             rows="5"
-            className="w-full p-3 rounded bg-black border border-gray-700 text-white"
+            className="w-full p-3 rounded bg-white border border-gray-300 text-black"
           ></textarea>
           <button
             type="submit"
-            className="bg-white text-black px-6 py-3 rounded font-semibold hover:bg-gray-200 transition"
+            className="bg-black text-white px-6 py-3 rounded font-semibold hover:bg-gray-800 transition"
           >
             Send Message
           </button>
@@ -148,9 +148,9 @@ export default function Home() {
       </section>
 
       {/* 🔹 Footer Section */}
-      <footer className="py-10 text-center bg-black border-t border-gray-800 text-gray-500 text-sm">
+      <footer className="py-10 text-center bg-white border-t border-gray-200 text-gray-600 text-sm">
         <p>© {new Date().getFullYear()} Oprahomes. All rights reserved.</p>
-        <div className="mt-2 flex justify-center gap-4 text-white text-lg">
+        <div className="mt-2 flex justify-center gap-4 text-black text-lg">
           <a href="https://www.instagram.com/oprahomes" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href="https://www.tiktok.com/@oprahomes" target="_blank" rel="noopener noreferrer">TikTok</a>
           <a href="mailto:oprahomes@gmail.com">Email</a>
