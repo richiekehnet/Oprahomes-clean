@@ -51,26 +51,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 🔹 Instagram Teaser Section */}
+      {/* 🔹 Instagram Teaser Section with Embedded Instagram Reels */}
       <section className="py-20 px-6 md:px-20 bg-neutral-100 text-black text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Follow Us on Instagram</h2>
         <p className="text-gray-600 mb-10 max-w-xl mx-auto">
           Behind the scenes, aerial reels, and the finest homes in Calgary.
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[1, 2, 3, 4].map((i) => (
-            <a
-              key={i}
-              href="https://www.instagram.com/oprahomes"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src={`/sample-ig${i}.jpg`}
-                alt={`Instagram post ${i}`}
-                className="rounded-lg hover:opacity-80 transition duration-300"
-              />
-            </a>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            "https://www.instagram.com/reel/Cy9ciKfpLjO/embed",
+            "https://www.instagram.com/reel/Cy9c2kqJWtv/embed",
+            "https://www.instagram.com/reel/Cy9d3rfpPOp/embed",
+            "https://www.instagram.com/reel/Cy9e4lMNpKk/embed"
+          ].map((src, index) => (
+            <div key={index} className="aspect-[9/16] overflow-hidden rounded-lg shadow-md">
+              <iframe
+                src={src}
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                allowTransparency={true}
+                allow="autoplay; encrypted-media"
+                className="w-full h-full"
+              ></iframe>
+            </div>
           ))}
         </div>
       </section>
