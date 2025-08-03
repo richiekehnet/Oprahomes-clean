@@ -15,13 +15,13 @@ export default function Home() {
       </header>
 
       {/* 🔥 Hero Section with Responsive YouTube Embeds */}
-      <section className="relative w-fullscreen overflow-hidden pt-20 h-[100vh]">
+      <section className="relative w-full overflow-hidden pt-20 h-[100vh]">
         {/* YouTube Portrait for Mobile */}
-        <div className="block sm:hidden absolute inset-0 w-fullscreen h-fullscreen z-0">
+        <div className="block sm:hidden absolute inset-0 w-full h-full z-0">
           <iframe
             src="https://www.youtube.com/embed/Yn_Rdl2t0Qs?autoplay=1&mute=1&controls=0&loop=1&playlist=Yn_Rdl2t0Qs&modestbranding=1&showinfo=0"
             title="Mobile Hero Reel"
-            className="w-fullscreen h-fullscreen object-cover"
+            className="w-full h-full object-cover"
             frameBorder="0"
             allow="autoplay; fullscreen"
             allowFullScreen
@@ -33,7 +33,7 @@ export default function Home() {
           <iframe
             src="https://www.youtube.com/embed/qpkg_Anh_vI?autoplay=1&mute=1&controls=0&loop=1&playlist=qpkg_Anh_vI&modestbranding=1&showinfo=0"
             title="Desktop Hero Reel"
-            className="w-fullscreen h-fullscreen object-cover"
+            className="w-full h-full object-cover"
             frameBorder="0"
             allow="autoplay; fullscreen"
             allowFullScreen
