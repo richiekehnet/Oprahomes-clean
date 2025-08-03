@@ -1,8 +1,21 @@
 import { FaTiktok } from 'react-icons/fa';
+import Head from 'next/head';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-black font-sans overflow-x-hidden">
+     <Head>
+        <title>Oprahomes – Calgary Real Estate Videography</title>
+        <meta name="description" content="Cinematic real estate videos, marketing, and branding for Calgary’s premium properties. Work with Oprahomes today." />
+        <meta property="og:title" content="Oprahomes – Cinematic Real Estate Marketing" />
+        <meta property="og:description" content="Calgary’s premier real estate videographer and licensed Realtor. See our cinematic home tours and work with us." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://oprahomes.com" />
+        <meta property="og:image" content="/preview.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </Head>
+
 
       {/* 🔼 Header */}
       <header className="fixed top-0 w-full bg-white text-black z-50 shadow-md py-4 px-6 flex justify-between items-center">
