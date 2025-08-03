@@ -14,36 +14,30 @@ export default function Home() {
         </nav>
       </header>
 
-      {/* 🔥 Hero Section with Responsive YouTube Videos */}
+      {/* 🔥 Hero Section with Responsive YouTube Embeds */}
       <section className="relative w-full overflow-hidden pt-20 h-[100vh]">
-        {/* Portrait Video for Mobile Devices */}
+        {/* YouTube Portrait for Mobile */}
         <div className="block sm:hidden absolute inset-0 w-full h-full z-0">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
+          <iframe
+            src="https://www.youtube.com/embed/Yn_Rdl2t0Qs?autoplay=1&mute=1&controls=0&loop=1&playlist=Yn_Rdl2t0Qs&modestbranding=1&showinfo=0"
+            title="Mobile Hero Reel"
             className="w-full h-full object-cover"
-            src="/mobile-hero.mp4"
-            type="video/mp4"
-          >
-            Your browser does not support the video tag.
-          </video>
+            frameBorder="0"
+            allow="autoplay; fullscreen"
+            allowFullScreen
+          ></iframe>
         </div>
 
-        {/* Landscape Video for Desktop and Tablets */}
+        {/* YouTube Landscape for Desktop/Tablet */}
         <div className="hidden sm:block absolute inset-0 w-full h-full z-0">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
+          <iframe
+            src="https://www.youtube.com/embed/qpkg_Anh_vI?autoplay=1&mute=1&controls=0&loop=1&playlist=qpkg_Anh_vI&modestbranding=1&showinfo=0"
+            title="Desktop Hero Reel"
             className="w-full h-full object-cover"
-            src="/desktop-hero.mp4"
-            type="video/mp4"
-          >
-            Your browser does not support the video tag.
-          </video>
+            frameBorder="0"
+            allow="autoplay; fullscreen"
+            allowFullScreen
+          ></iframe>
         </div>
 
         {/* Overlayed Hero Text */}
@@ -57,7 +51,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 🔹 Instagram Teaser with Local Videos */}
+      {/* 🔹 Instagram Teaser with Local Portrait Videos */}
       <section className="py-20 px-6 md:px-20 bg-neutral-100 text-black text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Follow Us on Instagram</h2>
         <p className="text-gray-600 mb-10 max-w-xl mx-auto">
