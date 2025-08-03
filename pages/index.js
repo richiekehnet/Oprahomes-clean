@@ -43,7 +43,7 @@ export default function Home() {
         {/* Overlayed Hero Text */}
         <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center px-6">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
-            Where Calgary’s Finest Homes Meet Cinematic Marketing
+            Welcome to Oprahomes
           </h1>
           <p className="text-gray-200 text-lg md:text-xl drop-shadow">
             Oprahomes | Realtor & Videographer
