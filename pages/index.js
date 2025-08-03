@@ -22,7 +22,7 @@ export default function Home() {
             <iframe
               src="https://www.youtube.com/embed/Yn_Rdl2t0Qs?autoplay=1&mute=1&controls=0&loop=1&playlist=Yn_Rdl2t0Qs&modestbranding=1&showinfo=0"
               title="Mobile Hero Reel"
-              className="absolute top-0 left-0 w-full h-full"
+              className="absolute top-full left-full w-full h-full"
               frameBorder="0"
               allow="autoplay; fullscreen"
               allowFullScreen
