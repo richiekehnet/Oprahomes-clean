@@ -36,7 +36,7 @@ export default function Home() {
             <iframe
               src="https://www.youtube.com/embed/qpkg_Anh_vI?autoplay=1&mute=1&controls=0&loop=1&playlist=qpkg_Anh_vI&modestbranding=1&showinfo=0"
               title="Desktop Hero Reel"
-              className="absolute top-50 left-50 w-full h-full"
+              className="absolute top-0 left-0 w-full h-full"
               frameBorder="0"
               allow="autoplay; fullscreen"
               allowFullScreen
