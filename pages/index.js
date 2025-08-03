@@ -18,26 +18,32 @@ export default function Home() {
       <section className="relative w-full overflow-hidden pt-20 h-[100vh]">
         {/* Portrait Video for Mobile Devices */}
         <div className="block sm:hidden absolute inset-0 w-full h-full z-0">
-          <iframe
-            src="https://www.youtube.com/embed/Yn_Rdl2t0Qs?autoplay=1&mute=1&loop=1&playlist=Yn_Rdl2t0Qs&controls=0&showinfo=0&modestbranding=1"
-            title="Hero Reel Mobile"
-            frameBorder="0"
-            allow="autoplay; fullscreen"
-            allowFullScreen
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
             className="w-full h-full object-cover"
-          ></iframe>
+            src="/mobile-hero.mp4"
+            type="video/mp4"
+          >
+            Your browser does not support the video tag.
+          </video>
         </div>
 
         {/* Landscape Video for Desktop and Tablets */}
         <div className="hidden sm:block absolute inset-0 w-full h-full z-0">
-          <iframe
-            src="https://www.youtube.com/embed/qpkg_Anh_vI?autoplay=1&mute=1&loop=1&playlist=qpkg_Anh_vI&controls=0&showinfo=0&modestbranding=1"
-            title="Hero Reel Desktop"
-            frameBorder="0"
-            allow="autoplay; fullscreen"
-            allowFullScreen
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
             className="w-full h-full object-cover"
-          ></iframe>
+            src="/desktop-hero.mp4"
+            type="video/mp4"
+          >
+            Your browser does not support the video tag.
+          </video>
         </div>
 
         {/* Overlayed Hero Text */}
@@ -51,25 +57,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 🔹 Instagram Teaser Section with Embedded Instagram Reels */}
+      {/* 🔹 Instagram Teaser with Local Videos */}
       <section className="py-20 px-6 md:px-20 bg-neutral-100 text-black text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Follow Us on Instagram</h2>
         <p className="text-gray-600 mb-10 max-w-xl mx-auto">
           Behind the scenes, aerial reels, and the finest homes in Calgary.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {["DMZ5P5_uXEJ"].map((id, index) => (
-            <div key={index} className="aspect-[9/16] overflow-hidden rounded-lg shadow-md">
-              <iframe
-                src={`https://www.instagram.com/reel/${id}/embed`}
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                allow="autoplay; encrypted-media"
-                allowFullScreen
-                className="w-full h-full"
-              ></iframe>
-            </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[1, 2, 3, 4].map((i) => (
+            <video
+              key={i}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="rounded-lg shadow-md w-full h-auto object-cover"
+              src={`/reel-${i}.mp4`}
+              type="video/mp4"
+            >
+              Your browser does not support the video tag.
+            </video>
           ))}
         </div>
       </section>
