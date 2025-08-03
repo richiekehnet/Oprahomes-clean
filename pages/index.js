@@ -29,11 +29,11 @@ export default function Home() {
         </div>
 
         {/* YouTube Landscape for Desktop/Tablet */}
-        <div className="hidden sm:block absolute inset-0 w-full h-full z-0">
+        <div className="hidden sm:block absolute inset-0 w-fullscreen h-fullscreen z-0">
           <iframe
             src="https://www.youtube.com/embed/qpkg_Anh_vI?autoplay=1&mute=1&controls=0&loop=1&playlist=qpkg_Anh_vI&modestbranding=1&showinfo=0"
             title="Desktop Hero Reel"
-            className="w-full h-full object-cover"
+            className="w-fullscreen h-fullscreen object-cover"
             frameBorder="0"
             allow="autoplay; fullscreen"
             allowFullScreen
