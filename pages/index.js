@@ -7,6 +7,7 @@ export default function Home() {
      <Head>
         <title>Oprahomes – Calgary Real Estate Videography</title>
         <meta name="description" content="Cinematic real estate videos, marketing, and branding for Calgary’s premium properties. Work with Oprahomes today." />
+        <meta name="robots" content="index, follow" />
         <meta property="og:title" content="Oprahomes – Cinematic Real Estate Marketing" />
         <meta property="og:description" content="Calgary’s premier real estate videographer and licensed Realtor. See our cinematic home tours and work with us." />
         <meta property="og:type" content="website" />
