@@ -1,9 +1,8 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-    siteUrl: 'https://www.oprahomes.ca',
-    generateRobotsTxt: true,
-    changefreq: 'weekly',
-    priority: 0.7,
-    sitemapSize: 7000,
-  };
-  
+  siteUrl: 'https://oprahomes.ca',   // your custom domain
+  generateRobotsTxt: true,           // automatically create robots.txt
+  sitemapSize: 7000,                 // optional, split if large
+  changefreq: 'daily',               // optional, update frequency
+  priority: 0.7                      // optional, default priority
+};
