@@ -1,29 +1,25 @@
-// ReelsSection.jsx
 import React from "react";
 
-const reels = [
-  "/reels/reel-1.mp4",
-  "/reels/reel-2.mp4",
-  "/reels/reel-3.mp4",
-  "/reels/reel-4.mp4"
-];
-
 const ReelsSection = () => {
+  const reels = [
+    "/reel-1.mp4",
+    "/reel-2.mp4",
+    "/reel-3.mp4",
+    "/reel-4.mp4"
+  ];
+
   return (
-    <section className="reels-section py-10 px-4">
-      <h2 className="text-3xl font-bold mb-6 text-center text-white">
-        Our Reels & Highlights
-      </h2>
-      <div className="reels-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        {reels.map((src, index) => (
-          <div key={index} className="video-container w-full aspect-[9/16] overflow-hidden rounded-lg shadow-lg">
+    <section className="py-10 px-4 bg-black text-white">
+      <h2 className="text-3xl font-bold text-center mb-6">Reels & Highlights</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {reels.map((reel, idx) => (
+          <div key={idx} className="w-full">
             <video
-              src={src}
+              src={reel}
               autoPlay
-              loop
               muted
-              playsInline
-              className="w-full h-full object-contain"
+              loop
+              className="w-full h-full object-contain rounded-lg shadow-lg"
             />
           </div>
         ))}
