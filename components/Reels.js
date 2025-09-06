@@ -18,26 +18,28 @@ const ReelsSection = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/40"></div>
+      {/* Cinematic dark overlay */}
+      <div className="absolute inset-0 bg-black/60"></div>
 
       <div className="relative z-10 container mx-auto px-4">
+        {/* Section Title */}
         <h2 className="text-4xl font-bold text-white text-center mb-8">
           Reels & Highlights
         </h2>
 
+        {/* Video Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {reels.map((reel) => (
             <div
               key={reel.id}
-              className="overflow-hidden rounded-xl transform transition duration-500 ease-in-out hover:scale-105 hover:-translate-y-2"
+              className="overflow-hidden rounded-xl bg-black"
             >
               <video
                 src={reel.src}
                 autoPlay
                 loop
                 muted
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
           ))}
