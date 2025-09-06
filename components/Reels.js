@@ -31,6 +31,7 @@ const Reels = () => {
 
   return (
     <section
+      id="reels"
       className="relative w-full py-20"
       style={{
         backgroundImage: "url('/reels-bg.jpg')",
