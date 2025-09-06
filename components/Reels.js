@@ -18,7 +18,6 @@ const ReelsSection = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* overlay */}
       <div className="absolute inset-0 bg-black/40"></div>
 
       <div className="relative z-10 container mx-auto px-4">
@@ -30,7 +29,8 @@ const ReelsSection = () => {
           {reels.map((reel) => (
             <div
               key={reel.id}
-              className="overflow-hidden rounded-xl group" // parent div
+              className="overflow-hidden rounded-xl group transition-transform duration-300 ease-in-out hover:scale-105"
+              style={{ aspectRatio: "9 / 16" }}
             >
               <video
                 src={reel.src}
@@ -38,7 +38,7 @@ const ReelsSection = () => {
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
               />
             </div>
           ))}
