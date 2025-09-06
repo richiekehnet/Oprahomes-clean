@@ -18,7 +18,7 @@ const ReelsSection = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Dark overlay for contrast */}
+      {/* Slightly darker overlay for better contrast */}
       <div className="absolute inset-0 bg-black/60"></div>
 
       <div className="relative z-10 container mx-auto px-4 text-center">
@@ -37,8 +37,8 @@ const ReelsSection = () => {
           We help realtors showcase their listings through cinematic reels,
           providing buyers and sellers with an immersive property experience.
           Additionally, we assist construction companies in tracking project
-          progress with consistent aerial footage, offering a clear view of
-          every stage of development.
+          progress with consistent aerial footage, giving a clear view of every
+          stage of development.
         </p>
 
         {/* Video Grid */}
@@ -46,15 +46,14 @@ const ReelsSection = () => {
           {reels.map((reel) => (
             <div
               key={reel.id}
-              className="overflow-hidden rounded-xl transform transition duration-500 ease-in-out hover:scale-105"
+              className="overflow-hidden rounded-xl transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50"
             >
               <video
                 src={reel.src}
                 autoPlay
                 loop
                 muted
-                playsInline
-                className="w-full h-full object-cover transform transition duration-500 ease-in-out hover:scale-110"
+                className="w-full h-full object-contain transform transition duration-500 ease-in-out hover:scale-110"
               />
             </div>
           ))}
