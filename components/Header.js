@@ -1,104 +1,48 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("top");
-  const navRef = useRef(null);
-  const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
 
-  const sections = [
-    { id: "top", label: "Home" },
-    { id: "reels", label: "Services" },
-    { id: "contact", label: "Contact" },
-  ];
-
-  // Scroll handler for active section
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      const scrollPos = window.scrollY + window.innerHeight / 3;
-      const reels = document.getElementById("reels");
-      const contact = document.getElementById("contact");
-
-      if (contact && scrollPos >= contact.offsetTop) setActiveSection("contact");
-      else if (reels && scrollPos >= reels.offsetTop) setActiveSection("reels");
-      else setActiveSection("top");
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // initial check
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Calculate underline position
-  const updateUnderline = () => {
-    if (navRef.current) {
-      const buttons = navRef.current.querySelectorAll("button[data-section]");
-      const activeBtn = Array.from(buttons).find((b) => b.dataset.section === activeSection);
-      if (activeBtn) {
-        const navRect = navRef.current.getBoundingClientRect();
-        const btnRect = activeBtn.getBoundingClientRect();
-        setUnderlineStyle({
-          left: btnRect.left - navRect.left, // relative to nav container
-          width: btnRect.width,
-        });
-      }
+  const handleScroll = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      setMenuOpen(false); // close mobile menu after click
     }
-  };
-
-  useEffect(() => updateUnderline(), [activeSection]);
-  useEffect(() => {
-    window.addEventListener("resize", updateUnderline);
-    return () => window.removeEventListener("resize", updateUnderline);
-  }, [activeSection]);
-
-  const scrollToSection = (id) => {
-    if (id === "top") window.scrollTo({ top: 0, behavior: "smooth" });
-    else {
-      const section = document.getElementById(id);
-      if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-    setMenuOpen(false);
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-black/90 backdrop-blur-md py-3" : "bg-transparent py-5"
-      }`}
-    >
-      <div className="container mx-auto px-4 flex items-center justify-between relative">
-        {/* Logo */}
-        <button
-          onClick={() => scrollToSection("top")}
-          className="text-white text-2xl font-bold tracking-widest drop-shadow-lg"
-        >
+    <header className="fixed top-0 left-0 w-full z-50 bg-black bg-opacity-70 backdrop-blur-md shadow-md">
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+        {/* Logo / Brand */}
+        <div className="text-white text-xl font-bold cursor-pointer" onClick={() => handleScroll("top")}>
           Oprahomes
-        </button>
+        </div>
 
         {/* Desktop Navigation */}
-        <nav ref={navRef} className="hidden md:flex space-x-6 relative">
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              data-section={section.id}
-              onClick={() => scrollToSection(section.id)}
-              className="px-3 py-2 text-white hover:text-gray-300 relative transition"
-            >
-              {section.label}
-            </button>
-          ))}
-
-          {/* Sliding underline */}
-          <div
-            className="absolute bottom-0 h-1 bg-yellow-400 transition-all duration-300"
-            style={{ left: underlineStyle.left, width: underlineStyle.width }}
-          />
+        <nav className="hidden md:flex gap-6 items-center">
+          <button
+            onClick={() => handleScroll("top")}
+            className="text-white hover:text-gray-300 transition"
+          >
+            Home
+          </button>
+          <button
+            onClick={() => handleScroll("reels")}
+            className="text-white hover:text-gray-300 transition"
+          >
+            Services
+          </button>
+          <a
+            href="#contact"
+            className="bg-white text-black px-4 py-2 rounded hover:bg-gray-200 transition"
+          >
+            Book Consultation
+          </a>
         </nav>
 
-        {/* Mobile Menu */}
-        <div className="md:hidden relative">
+        {/* Mobile Menu Button */}
+        <div className="md:hidden flex items-center">
           <button onClick={() => setMenuOpen(!menuOpen)} className="text-white focus:outline-none">
             {menuOpen ? (
               <svg
@@ -108,7 +52,12 @@ const Header = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             ) : (
               <svg
@@ -116,3 +65,47 @@ const Header = () => {
                 className="h-8 w-8"
                 fill="none"
                 viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-black bg-opacity-90 backdrop-blur-md">
+          <nav className="flex flex-col gap-4 px-6 py-4">
+            <button
+              onClick={() => handleScroll("top")}
+              className="text-white hover:text-gray-300 transition text-lg text-left"
+            >
+              Home
+            </button>
+            <button
+              onClick={() => handleScroll("reels")}
+              className="text-white hover:text-gray-300 transition text-lg text-left"
+            >
+              Services
+            </button>
+            <a
+              href="#contact"
+              className="bg-white text-black px-4 py-2 rounded hover:bg-gray-200 transition text-left"
+            >
+              Book Consultation
+            </a>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+};
+
+export default Header;
