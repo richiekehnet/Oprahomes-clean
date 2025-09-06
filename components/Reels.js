@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const reels = [
   { id: 1, src: "/reel-1.mp4" },
@@ -8,6 +10,14 @@ const reels = [
 ];
 
 const ReelsSection = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: "ease-in-out",
+      once: true,
+    });
+  }, []);
+
   return (
     <section
       className="relative w-full py-16"
@@ -18,28 +28,32 @@ const ReelsSection = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Overlay for videos */}
-      <div className="absolute inset-0 bg-black/40"></div>
+      {/* Cinematic dark overlay */}
+      <div className="absolute inset-0 bg-black/60"></div>
 
       <div className="relative z-10 container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-white text-center mb-8 
-               transition duration-500 ease-in-out 
-               hover:text-yellow-400 hover:drop-shadow-[0_0_10px_rgba(255,255,0,0.6)]">
+        {/* Section Title */}
+        <h2
+          className="text-4xl font-bold text-white text-center mb-8"
+          data-aos="fade-down"
+        >
           Reels & Highlights
         </h2>
 
+        {/* Video Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {reels.map((reel) => (
             <div
               key={reel.id}
-              className="overflow-hidden rounded-xl transform transition-transform duration-500 ease-in-out hover:scale-105 hover:-translate-y-2"
+              className="overflow-hidden rounded-xl bg-black"
+              data-aos="fade-up"
             >
               <video
                 src={reel.src}
                 autoPlay
                 loop
                 muted
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
           ))}
