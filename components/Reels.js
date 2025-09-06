@@ -69,24 +69,21 @@ const ReelsSection = () => {
         {/* Horizontal scroll container */}
         <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 touch-pan-x"
+          className="flex gap-6 overflow-x-auto scroll-smooth pb-4"
         >
           {reels.map((reel) => (
             <div
               key={reel.id}
-              className="flex-shrink-0 w-72 rounded-xl drop-shadow-xl relative transform transition duration-500 ease-in-out hover:scale-105 snap-center"
+              className="flex-shrink-0 w-72 overflow-visible rounded-xl transform transition duration-500 ease-in-out hover:scale-105 drop-shadow-xl"
             >
-              {/* Inner wrapper allows double zoom without cropping */}
-              <div className="w-full h-full overflow-visible">
-                <video
-                  src={reel.src}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover transform transition duration-500 ease-in-out hover:scale-110 origin-center"
-                />
-              </div>
+              <video
+                src={reel.src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-contain transform transition duration-500 ease-in-out hover:scale-110 origin-center"
+              />
             </div>
           ))}
         </div>
