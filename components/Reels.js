@@ -37,6 +37,7 @@ export default function ReelsSection() {
         backgroundImage: "url('/reels-bg.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
       <h2 className="text-4xl font-bold text-center mb-8">Reels & Highlights</h2>
