@@ -15,9 +15,13 @@ const Header = () => {
 
   // Smooth scroll function
   const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (id === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
     setMenuOpen(false); // close menu on mobile after click
   };
@@ -30,14 +34,21 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/">
-          <a className="text-white text-2xl font-bold tracking-widest drop-shadow-lg">
-            Oprahomes
-          </a>
-        </Link>
+        <button
+          onClick={() => scrollToSection("top")}
+          className="text-white text-2xl font-bold tracking-widest drop-shadow-lg"
+        >
+          Oprahomes
+        </button>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6">
+          <button
+            onClick={() => scrollToSection("top")}
+            className="text-white hover:text-gray-300 transition"
+          >
+            Home
+          </button>
           <button
             onClick={() => scrollToSection("reels")}
             className="text-white hover:text-gray-300 transition"
@@ -94,6 +105,12 @@ const Header = () => {
           {/* Mobile Menu */}
           {menuOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-black/90 backdrop-blur-md rounded shadow-lg py-2 flex flex-col">
+              <button
+                onClick={() => scrollToSection("top")}
+                className="px-4 py-2 text-white hover:bg-white/20 transition text-left"
+              >
+                Home
+              </button>
               <button
                 onClick={() => scrollToSection("reels")}
                 className="px-4 py-2 text-white hover:bg-white/20 transition text-left"
