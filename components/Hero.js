@@ -2,7 +2,12 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+    <section
+      className="relative w-full overflow-hidden"
+      style={{
+        paddingTop: "56.25%", // 16:9 aspect ratio, keeps video centered responsively
+      }}
+    >
       {/* Background Video */}
       <video
         src="/hero.mp4"
@@ -10,7 +15,7 @@ const Hero = () => {
         loop
         muted
         playsInline
-        className="absolute w-full h-full object-cover"
+        className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full max-w-none max-h-none -translate-x-1/2 -translate-y-1/2 object-cover"
       />
 
       {/* Overlay */}
@@ -21,7 +26,7 @@ const Hero = () => {
         <p className="text-white text-lg md:text-2xl mb-6 drop-shadow-md">
           Realtor | Videographer | Oprahomes
         </p>
-        <div className="flex gap-4">
+        <div className="flex gap-4 flex-wrap justify-center">
           <a
             href="#services"
             className="bg-white text-black px-6 py-3 rounded hover:bg-gray-200 transition"
