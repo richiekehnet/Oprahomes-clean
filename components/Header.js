@@ -13,21 +13,17 @@ const Header = () => {
     { id: "contact", label: "Contact" },
   ];
 
+  // Scroll handler for active section
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      const scrollPos = window.scrollY + window.innerHeight / 3;
+      const reels = document.getElementById("reels");
+      const contact = document.getElementById("contact");
 
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
-      const reelsSection = document.getElementById("reels");
-      const contactSection = document.getElementById("contact");
-
-      if (contactSection && scrollPosition >= contactSection.offsetTop) {
-        setActiveSection("contact");
-      } else if (reelsSection && scrollPosition >= reelsSection.offsetTop) {
-        setActiveSection("reels");
-      } else {
-        setActiveSection("top");
-      }
+      if (contact && scrollPos >= contact.offsetTop) setActiveSection("contact");
+      else if (reels && scrollPos >= reels.offsetTop) setActiveSection("reels");
+      else setActiveSection("top");
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -35,26 +31,31 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    // Update sliding underline
+  // Calculate underline position
+  const updateUnderline = () => {
     if (navRef.current) {
       const buttons = navRef.current.querySelectorAll("button[data-section]");
-      const activeButton = Array.from(buttons).find(
-        (btn) => btn.dataset.section === activeSection
-      );
-      if (activeButton) {
+      const activeBtn = Array.from(buttons).find((b) => b.dataset.section === activeSection);
+      if (activeBtn) {
+        const navRect = navRef.current.getBoundingClientRect();
+        const btnRect = activeBtn.getBoundingClientRect();
         setUnderlineStyle({
-          left: activeButton.offsetLeft,
-          width: activeButton.offsetWidth,
+          left: btnRect.left - navRect.left, // relative to nav container
+          width: btnRect.width,
         });
       }
     }
-  }, [activeSection, isScrolled]);
+  };
+
+  useEffect(() => updateUnderline(), [activeSection]);
+  useEffect(() => {
+    window.addEventListener("resize", updateUnderline);
+    return () => window.removeEventListener("resize", updateUnderline);
+  }, [activeSection]);
 
   const scrollToSection = (id) => {
-    if (id === "top") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
+    if (id === "top") window.scrollTo({ top: 0, behavior: "smooth" });
+    else {
       const section = document.getElementById(id);
       if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -77,10 +78,7 @@ const Header = () => {
         </button>
 
         {/* Desktop Navigation */}
-        <nav
-          ref={navRef}
-          className="hidden md:flex space-x-6 relative"
-        >
+        <nav ref={navRef} className="hidden md:flex space-x-6 relative">
           {sections.map((section) => (
             <button
               key={section.id}
@@ -99,7 +97,7 @@ const Header = () => {
           />
         </nav>
 
-        {/* Mobile Burger Menu */}
+        {/* Mobile Menu */}
         <div className="md:hidden relative">
           <button onClick={() => setMenuOpen(!menuOpen)} className="text-white focus:outline-none">
             {menuOpen ? (
@@ -118,34 +116,3 @@ const Header = () => {
                 className="h-8 w-8"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </button>
-
-          {menuOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-black/90 backdrop-blur-md rounded shadow-lg py-2 flex flex-col">
-              {sections.map((section) => (
-                <button
-                  key={section.id}
-                  onClick={() => scrollToSection(section.id)}
-                  className={`px-4 py-2 text-left transition ${
-                    activeSection === section.id
-                      ? "text-yellow-400"
-                      : "text-white hover:bg-white/20"
-                  }`}
-                >
-                  {section.label}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </header>
-  );
-};
-
-export default Header;
