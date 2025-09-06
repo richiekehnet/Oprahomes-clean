@@ -1,38 +1,16 @@
-import { useState, useEffect } from "react";
+import React from "react";
 
 const reels = [
-  "reel-1.mp4",
-  "reel-2.mp4",
-  "reel-3.mp4",
-  "reel-4.mp4",
+  { id: 1, src: "/reel-1.mp4" },
+  { id: 2, src: "/reel-2.mp4" },
+  { id: 3, src: "/reel-3.mp4" },
+  { id: 4, src: "/reel-4.mp4" },
 ];
 
-export default function ReelsSection() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  // Track scroll to trigger section fade-in
-  useEffect(() => {
-    const handleScroll = () => {
-      const section = document.getElementById("reels-section");
-      if (section) {
-        const top = section.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        if (top < windowHeight - 100) {
-          setIsVisible(true);
-        }
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+const ReelsSection = () => {
   return (
     <section
-      id="reels-section"
-      className={`py-10 px-4 text-white relative overflow-hidden transition-opacity duration-1000 ${
-        isVisible ? "opacity-100" : "opacity-0 translate-y-10"
-      }`}
+      className="relative w-full py-16"
       style={{
         backgroundImage: "url('/reels-bg.jpg')",
         backgroundSize: "cover",
@@ -40,39 +18,35 @@ export default function ReelsSection() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <h2 className="text-4xl font-bold text-center mb-8">Reels & Highlights</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {reels.map((video, index) => (
-          <div
-            key={video}
-            className={`transition-transform duration-500 ease-in-out transform hover:scale-105 hover:-translate-y-2 opacity-0 ${
-              isVisible ? "animate-fadeIn" : ""
-            }`}
-            style={{ animationDelay: `${index * 0.2}s`, animationFillMode: "forwards" }}
-          >
-            <video
-              src={`/${video}`}
-              className="w-full h-[500px] object-cover rounded-lg shadow-lg"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
-          </div>
-        ))}
-      </div>
+      {/* Overlay for videos */}
+      <div className="absolute inset-0 bg-black/40"></div>
 
-      {/* Inline Tailwind animation for fadeIn */}
-      <style jsx>{`
-        @keyframes fadeIn {
-          to {
-            opacity: 1;
-          }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.8s ease forwards;
-        }
-      `}</style>
+      <div className="relative z-10 container mx-auto px-4">
+        <h2 className="text-4xl font-bold text-white text-center mb-8 
+               transition duration-500 ease-in-out 
+               hover:text-yellow-400 hover:drop-shadow-[0_0_10px_rgba(255,255,0,0.6)]">
+          Reels & Highlights
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {reels.map((reel) => (
+            <div
+              key={reel.id}
+              className="overflow-hidden rounded-xl transform transition-transform duration-500 ease-in-out hover:scale-105 hover:-translate-y-2"
+            >
+              <video
+                src={reel.src}
+                autoPlay
+                loop
+                muted
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
-}
+};
+
+export default ReelsSection;
