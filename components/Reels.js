@@ -5,8 +5,8 @@ const reels = [
   { id: 2, src: "/reel-2.mp4" },
   { id: 3, src: "/reel-3.mp4" },
   { id: 4, src: "/reel-4.mp4" },
-  { id: 5, src: "/reel-5.mp4" }, 
-  { id: 6, src: "/reel-6.mp4" },// add more reels if needed
+  { id: 5, src: "/reel-5.mp4" },
+  { id: 6, src: "/reel-6.mp4" }, // Add more manually if needed
 ];
 
 const Reels = () => {
@@ -15,9 +15,15 @@ const Reels = () => {
 
   const scroll = (direction, ref) => {
     if (ref.current) {
-      const { clientWidth } = ref.current;
-      ref.current.scrollBy({
-        left: direction === "right" ? clientWidth : -clientWidth,
+      const container = ref.current;
+      const reel = container.querySelector("div"); // first reel item
+      if (!reel) return;
+
+      const gap = 16; // matches Tailwind gap-4 (desktop: gap-6 = 24px)
+      const scrollAmount = reel.clientWidth + gap;
+
+      container.scrollBy({
+        left: direction === "right" ? scrollAmount : -scrollAmount,
         behavior: "smooth",
       });
     }
@@ -52,7 +58,7 @@ const Reels = () => {
           stage of development.
         </p>
 
-        {/* Desktop Horizontal Scroll with Scroll Snap */}
+        {/* Desktop Horizontal Scroll */}
         <div className="hidden md:block relative">
           {/* Scroll Arrows */}
           <div className="flex justify-between absolute top-1/2 left-0 right-0 px-2 z-20">
