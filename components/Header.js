@@ -1,29 +1,23 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Smooth scroll function
   const scrollToSection = (id) => {
     if (id === "top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       const section = document.getElementById(id);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-    setMenuOpen(false); // close menu on mobile after click
+    setMenuOpen(false); // close mobile menu after click
   };
 
   return (
