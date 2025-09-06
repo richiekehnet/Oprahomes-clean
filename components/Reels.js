@@ -9,29 +9,26 @@ const reels = [
 
 const ReelsSection = () => {
   return (
-    <section
-      className="relative w-full py-20 bg-black"
-      style={{
-        backgroundImage: "url('/reels-bg.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      {/* Overlay for readability */}
+    <section className="relative w-full py-20 bg-black">
+      {/* Optional overlay for background */}
       <div className="absolute inset-0 bg-black/40"></div>
 
       <div className="relative z-10 container mx-auto px-4 text-center">
-        {/* Section Heading */}
-        <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
+        {/* Small heading like 'Our Services' */}
+        <h3 className="text-sm md:text-base font-semibold text-white/70 uppercase tracking-widest mb-2">
+          Our Services
+        </h3>
+
+        {/* Main heading like 'Real Estate' */}
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
           Cinematic Reels
         </h2>
 
-        {/* Section Description */}
-        <p className="text-white/90 text-lg md:text-xl max-w-3xl mx-auto mb-12">
-          Dive into our latest projects, home highlights, and cinematic journeys
-          through Calgary’s finest properties. Each reel showcases the magic we
-          bring to real estate marketing.
+        {/* Paragraph/description */}
+        <p className="text-white/90 text-base md:text-lg max-w-2xl mx-auto mb-12">
+          Experience our cinematic approach to real estate marketing. Each reel
+          highlights the beauty of Calgary’s properties, bringing each home to
+          life through high-quality video storytelling.
         </p>
 
         {/* Video Grid */}
