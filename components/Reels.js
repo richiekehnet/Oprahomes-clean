@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const reels = [
   { id: 1, src: "/reel-1.mp4" },
@@ -6,6 +7,15 @@ const reels = [
   { id: 3, src: "/reel-3.mp4" },
   { id: 4, src: "/reel-4.mp4" },
 ];
+
+const textVariant = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
 
 const ReelsSection = () => {
   return (
@@ -18,28 +28,46 @@ const ReelsSection = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Overlay for readability */}
-      <div className="absolute inset-0 bg-black/40"></div>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/60"></div>
 
       <div className="relative z-10 container mx-auto px-4 text-center">
         {/* Small heading */}
-        <h3 className="text-sm md:text-base font-semibold text-white/70 uppercase tracking-widest mb-2">
+        <motion.h3
+          className="text-sm md:text-base font-semibold text-white/90 uppercase tracking-widest mb-2 drop-shadow-md"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={textVariant}
+        >
           Our Services
-        </h3>
+        </motion.h3>
 
         {/* Main heading */}
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+        <motion.h2
+          className="text-4xl md:text-5xl font-extrabold text-white mb-6 drop-shadow-lg"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={textVariant}
+        >
           Real Estate
-        </h2>
+        </motion.h2>
 
         {/* Services description */}
-        <p className="text-white/90 text-base md:text-lg max-w-2xl mx-auto mb-12">
+        <motion.p
+          className="text-white text-base md:text-lg max-w-2xl mx-auto mb-12 drop-shadow-md"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={textVariant}
+        >
           We help realtors showcase their listings through cinematic reels,
           providing buyers and sellers with an immersive property experience.
           Additionally, we assist construction companies in tracking project
           progress with consistent aerial footage, giving a clear view of every
           stage of development.
-        </p>
+        </motion.p>
 
         {/* Video Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
