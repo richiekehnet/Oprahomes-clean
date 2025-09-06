@@ -1,30 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const Hero = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Update isMobile on resize
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize(); // initial check
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-      {/* Hero Video */}
+    <section className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+      {/* Background Video */}
       <video
-        className="absolute top-0 left-0 w-full h-full object-cover"
-        src={isMobile ? "/hero-mobile.mp4" : "/hero-desktop.mp4"}
+        src="/hero.mp4"
         autoPlay
         loop
         muted
         playsInline
+        className="absolute w-full h-full object-cover"
       />
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center px-4 animate-fadeInUp">
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center px-4 animate-fadeInUp">
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
           Where Calgary's Finest Homes Meet Cinematic Marketing
         </h1>
