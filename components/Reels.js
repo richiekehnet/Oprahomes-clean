@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 const reels = [
   { id: 1, src: "/reel-1.mp4" },
@@ -10,7 +10,17 @@ const reels = [
 
 const Reels = () => {
   const scrollRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
 
+  // Detect mobile
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Desktop scroll buttons
   const scroll = (direction) => {
     if (scrollRef.current) {
       const { clientWidth } = scrollRef.current;
@@ -20,6 +30,32 @@ const Reels = () => {
       });
     }
   };
+
+  // Mobile infinite scroll
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const container = scrollRef.current;
+    let scrollInterval;
+
+    const startInfiniteScroll = () => {
+      scrollInterval = setInterval(() => {
+        if (!container) return;
+
+        // Scroll by 1px
+        container.scrollLeft += 1;
+
+        // Reset scroll when reaching the end
+        if (container.scrollLeft >= container.scrollWidth / 2) {
+          container.scrollLeft = 0;
+        }
+      }, 20); // adjust speed here
+    };
+
+    startInfiniteScroll();
+
+    return () => clearInterval(scrollInterval);
+  }, [isMobile]);
 
   return (
     <section
@@ -50,7 +86,7 @@ const Reels = () => {
           stage of development.
         </p>
 
-        {/* Desktop Grid (unchanged) */}
+        {/* Desktop Grid */}
         <div className="hidden md:grid grid-cols-4 gap-6">
           {reels.map((reel) => (
             <div
@@ -90,12 +126,13 @@ const Reels = () => {
           {/* Scrollable Container */}
           <div
             ref={scrollRef}
-            className="flex gap-4 overflow-x-auto scroll-smooth py-2 px-2 snap-x snap-mandatory"
+            className="flex gap-4 overflow-x-visible scroll-smooth py-2 px-6 snap-x snap-mandatory"
           >
-            {reels.map((reel) => (
+            {/* Duplicate reels for seamless infinite scroll */}
+            {[...reels, ...reels].map((reel, index) => (
               <div
-                key={reel.id}
-                className="flex-shrink-0 w-72 overflow-hidden rounded-xl transform transition duration-500 ease-in-out hover:scale-105 drop-shadow-xl snap-center"
+                key={index}
+                className="flex-shrink-0 w-72 overflow-visible rounded-xl transform transition duration-500 ease-in-out hover:scale-105 drop-shadow-xl snap-center"
               >
                 <video
                   src={reel.src}
