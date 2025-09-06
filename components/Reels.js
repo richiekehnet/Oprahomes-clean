@@ -1,24 +1,35 @@
+// ReelsSection.jsx
 import React from "react";
 
-const Reels = () => {
+const reels = [
+  "/reels/reel-1.mp4",
+  "/reels/reel-2.mp4",
+  "/reels/reel-3.mp4",
+  "/reels/reel-4.mp4"
+];
+
+const ReelsSection = () => {
   return (
-    <section className="py-20 bg-white text-center px-4 animate-fadeInUp">
-      <h2 className="text-3xl md:text-4xl font-bold mb-8">Reels & Highlights</h2>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {[1, 2, 3, 4].map((i) => (
-          <video
-            key={i}
-            className="w-full h-64 object-cover rounded-lg shadow-lg transform transition duration-300 hover:scale-105"
-            src={`/reel-${i}.mp4`}
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
+    <section className="reels-section py-10 px-4">
+      <h2 className="text-3xl font-bold mb-6 text-center text-white">
+        Our Reels & Highlights
+      </h2>
+      <div className="reels-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        {reels.map((src, index) => (
+          <div key={index} className="video-container w-full aspect-[9/16] overflow-hidden rounded-lg shadow-lg">
+            <video
+              src={src}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-contain"
+            />
+          </div>
         ))}
       </div>
     </section>
   );
 };
 
-export default Reels;
+export default ReelsSection;
