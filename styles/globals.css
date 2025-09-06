@@ -7,3 +7,13 @@ html, body {
   margin: 0;
   font-family: 'Inter', sans-serif;
 }
+
+/* Portrait video wrapper */
+.video-container {
+  @apply w-full max-w-[400px] aspect-[9/16] mx-auto;
+}
+
+.video-container video {
+  @apply w-full h-full object-contain;
+}
+
