@@ -1,32 +1,31 @@
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-const ReelsSection = () => {
-  const [offsetY, setOffsetY] = useState(0);
+const reels = [
+  "reel-1.mp4",
+  "reel-2.mp4",
+  "reel-3.mp4",
+  "reel-4.mp4",
+];
+
+export default function ReelsSection() {
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleScroll = () => setOffsetY(window.pageYOffset);
-
+  // Track scroll to trigger section fade-in
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const section = document.getElementById("reels-section");
-    const handleVisibility = () => {
+    const handleScroll = () => {
+      const section = document.getElementById("reels-section");
       if (section) {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.85) {
+        const top = section.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (top < windowHeight - 100) {
           setIsVisible(true);
         }
       }
     };
-    window.addEventListener("scroll", handleVisibility);
-    handleVisibility(); // check on load
-    return () => window.removeEventListener("scroll", handleVisibility);
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const reels = ["/reel-1.mp4", "/reel-2.mp4", "/reel-3.mp4", "/reel-4.mp4"];
 
   return (
     <section
@@ -37,37 +36,42 @@ const ReelsSection = () => {
       style={{
         backgroundImage: "url('/reels-bg.jpg')",
         backgroundSize: "cover",
-        backgroundPosition: `center ${offsetY * 0.5}px`,
-        backgroundAttachment: "scroll",
-        transition: "background-position 0.1s ease-out",
+        backgroundPosition: "center",
       }}
     >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-60"></div>
-
-      <div className="relative z-10">
-        <h2 className="text-3xl font-bold text-center mb-6">
-          Reels & Highlights
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {reels.map((reel, idx) => (
-            <div
-              key={idx}
-              className="w-full transform transition-transform duration-500 ease-in-out hover:scale-105 hover:-translate-y-2"
-            >
-              <video
-                src={reel}
-                autoPlay
-                muted
-                loop
-                className="w-full h-full object-contain rounded-lg shadow-lg"
-              />
-            </div>
-          ))}
-        </div>
+      <h2 className="text-4xl font-bold text-center mb-8">Reels & Highlights</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {reels.map((video, index) => (
+          <div
+            key={video}
+            className={`transition-transform duration-500 ease-in-out transform hover:scale-105 hover:-translate-y-2 opacity-0 ${
+              isVisible ? "animate-fadeIn" : ""
+            }`}
+            style={{ animationDelay: `${index * 0.2}s`, animationFillMode: "forwards" }}
+          >
+            <video
+              src={`/${video}`}
+              className="w-full h-[500px] object-cover rounded-lg shadow-lg"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+          </div>
+        ))}
       </div>
+
+      {/* Inline Tailwind animation for fadeIn */}
+      <style jsx>{`
+        @keyframes fadeIn {
+          to {
+            opacity: 1;
+          }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.8s ease forwards;
+        }
+      `}</style>
     </section>
   );
-};
-
-export default ReelsSection;
+}
