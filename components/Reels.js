@@ -18,7 +18,7 @@ const ReelsSection = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Slightly darker overlay for better contrast */}
+      {/* Overlay for contrast */}
       <div className="absolute inset-0 bg-black/60"></div>
 
       <div className="relative z-10 container mx-auto px-4 text-center">
@@ -46,7 +46,7 @@ const ReelsSection = () => {
           {reels.map((reel) => (
             <div
               key={reel.id}
-              className="overflow-hidden rounded-xl transform transition duration-500 ease-in-out hover:scale-105 shadow-2xl"
+              className="overflow-hidden rounded-xl transform transition duration-500 ease-in-out hover:scale-105"
             >
               <video
                 src={reel.src}
@@ -54,7 +54,7 @@ const ReelsSection = () => {
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-contain transform transition duration-500 ease-in-out hover:scale-110 drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]"
+                className="w-full h-full object-cover transform transition duration-500 ease-in-out hover:scale-110"
               />
             </div>
           ))}
