@@ -46,14 +46,15 @@ const ReelsSection = () => {
           {reels.map((reel) => (
             <div
               key={reel.id}
-              className="overflow-hidden rounded-xl transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50"
+              className="overflow-hidden rounded-xl transform transition duration-500 ease-in-out hover:scale-105 shadow-lg"
             >
               <video
                 src={reel.src}
                 autoPlay
                 loop
                 muted
-                className="w-full h-full object-contain transform transition duration-500 ease-in-out hover:scale-110"
+                playsInline
+                className="w-full h-full object-contain transform transition duration-500 ease-in-out hover:scale-110 drop-shadow-xl"
               />
             </div>
           ))}
