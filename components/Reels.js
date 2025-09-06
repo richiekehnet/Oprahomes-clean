@@ -53,8 +53,8 @@ const ReelsSection = () => {
                 autoPlay
                 loop
                 muted
-                playsInline // fixes mobile autoplay
-                className="w-full h-full object-cover"
+                playsInline
+                className="w-full h-full object-cover transform transition duration-500 ease-in-out hover:scale-110"
               />
             </div>
           ))}
