@@ -1,49 +1,74 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
 
 const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleScroll = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-      setMenuOpen(false); // close mobile menu after click
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Smooth scroll function
+  const scrollToSection = (id) => {
+    if (id === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
+    setMenuOpen(false); // close menu on mobile after click
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-black bg-opacity-70 backdrop-blur-md shadow-md">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-        {/* Logo / Brand */}
-        <div className="text-white text-xl font-bold cursor-pointer" onClick={() => handleScroll("top")}>
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? "bg-black/90 backdrop-blur-md py-3" : "bg-transparent py-5"
+      }`}
+    >
+      <div className="container mx-auto px-4 flex items-center justify-between">
+        {/* Logo */}
+        <button
+          onClick={() => scrollToSection("top")}
+          className="text-white text-2xl font-bold tracking-widest drop-shadow-lg"
+        >
           Oprahomes
-        </div>
+        </button>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex gap-6 items-center">
+        <nav className="hidden md:flex space-x-6">
           <button
-            onClick={() => handleScroll("top")}
+            onClick={() => scrollToSection("top")}
             className="text-white hover:text-gray-300 transition"
           >
             Home
           </button>
           <button
-            onClick={() => handleScroll("reels")}
+            onClick={() => scrollToSection("reels")}
             className="text-white hover:text-gray-300 transition"
           >
             Services
           </button>
-          <a
-            href="#contact"
-            className="bg-white text-black px-4 py-2 rounded hover:bg-gray-200 transition"
+          <button
+            onClick={() => scrollToSection("contact")}
+            className="text-white hover:text-gray-300 transition"
           >
-            Book Consultation
-          </a>
+            Contact
+          </button>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center">
-          <button onClick={() => setMenuOpen(!menuOpen)} className="text-white focus:outline-none">
+        {/* Mobile Burger Menu */}
+        <div className="md:hidden">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="text-white focus:outline-none"
+          >
             {menuOpen ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -76,34 +101,32 @@ const Header = () => {
               </svg>
             )}
           </button>
+
+          {/* Mobile Menu */}
+          {menuOpen && (
+            <div className="absolute right-0 mt-2 w-48 bg-black/90 backdrop-blur-md rounded shadow-lg py-2 flex flex-col">
+              <button
+                onClick={() => scrollToSection("top")}
+                className="px-4 py-2 text-white hover:bg-white/20 transition text-left"
+              >
+                Home
+              </button>
+              <button
+                onClick={() => scrollToSection("reels")}
+                className="px-4 py-2 text-white hover:bg-white/20 transition text-left"
+              >
+                Services
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="px-4 py-2 text-white hover:bg-white/20 transition text-left"
+              >
+                Contact
+              </button>
+            </div>
+          )}
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-black bg-opacity-90 backdrop-blur-md">
-          <nav className="flex flex-col gap-4 px-6 py-4">
-            <button
-              onClick={() => handleScroll("top")}
-              className="text-white hover:text-gray-300 transition text-lg text-left"
-            >
-              Home
-            </button>
-            <button
-              onClick={() => handleScroll("reels")}
-              className="text-white hover:text-gray-300 transition text-lg text-left"
-            >
-              Services
-            </button>
-            <a
-              href="#contact"
-              className="bg-white text-black px-4 py-2 rounded hover:bg-gray-200 transition text-left"
-            >
-              Book Consultation
-            </a>
-          </nav>
-        </div>
-      )}
     </header>
   );
 };
