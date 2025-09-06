@@ -1,44 +1,26 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 
 const reels = [
   { id: 1, src: "/reel-1.mp4" },
   { id: 2, src: "/reel-2.mp4" },
   { id: 3, src: "/reel-3.mp4" },
   { id: 4, src: "/reel-4.mp4" },
-  { id: 5, src: "/reel-5.mp4" },
+  { id: 5, src: "/reel-5.mp4" }, // add more reels if needed
 ];
 
 const Reels = () => {
-  const scrollRef = useRef(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+  const scrollRefMobile = useRef(null);
+  const scrollRefDesktop = useRef(null);
 
-  const scroll = (direction) => {
-    if (scrollRef.current) {
-      const { clientWidth } = scrollRef.current;
-      scrollRef.current.scrollBy({
+  const scroll = (ref, direction) => {
+    if (ref.current) {
+      const { clientWidth } = ref.current;
+      ref.current.scrollBy({
         left: direction === "right" ? clientWidth : -clientWidth,
         behavior: "smooth",
       });
     }
   };
-
-  const updateArrows = () => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1);
-    }
-  };
-
-  useEffect(() => {
-    const container = scrollRef.current;
-    if (container) {
-      container.addEventListener("scroll", updateArrows);
-      updateArrows();
-      return () => container.removeEventListener("scroll", updateArrows);
-    }
-  }, []);
 
   return (
     <section
@@ -69,23 +51,46 @@ const Reels = () => {
           stage of development.
         </p>
 
-        {/* Desktop Grid */}
-        <div className="hidden md:grid grid-cols-4 gap-6">
-          {reels.map((reel) => (
-            <div
-              key={reel.id}
-              className="overflow-hidden rounded-xl transform transition duration-500 ease-in-out hover:scale-105 drop-shadow-xl"
+        {/* Desktop Horizontal Scroll (NEW) */}
+        <div className="hidden md:block relative">
+          {/* Scroll Arrows */}
+          <div className="flex justify-between absolute top-1/2 left-0 right-0 px-2 z-20">
+            <button
+              onClick={() => scroll(scrollRefDesktop, "left")}
+              className="bg-white/30 text-white p-2 rounded-full hover:bg-white/60 transition"
             >
-              <video
-                src={reel.src}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover transform transition duration-500 ease-in-out hover:scale-110"
-              />
-            </div>
-          ))}
+              &#8249;
+            </button>
+            <button
+              onClick={() => scroll(scrollRefDesktop, "right")}
+              className="bg-white/30 text-white p-2 rounded-full hover:bg-white/60 transition"
+            >
+              &#8250;
+            </button>
+          </div>
+
+          {/* Scrollable Grid Container */}
+          <div
+            ref={scrollRefDesktop}
+            className="flex gap-6 overflow-x-auto scroll-smooth py-2 px-2"
+            style={{ paddingBottom: "20px" }}
+          >
+            {reels.map((reel) => (
+              <div
+                key={reel.id}
+                className="flex-shrink-0 w-[23%] overflow-hidden rounded-xl transform transition duration-500 ease-in-out hover:scale-105 drop-shadow-xl"
+              >
+                <video
+                  src={reel.src}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover transform transition duration-500 ease-in-out hover:scale-110"
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Mobile Horizontal Carousel */}
@@ -93,24 +98,14 @@ const Reels = () => {
           {/* Scroll Arrows */}
           <div className="flex justify-between absolute top-1/2 left-0 right-0 px-2 z-20">
             <button
-              onClick={() => scroll("left")}
-              disabled={!canScrollLeft}
-              className={`p-2 rounded-full transition ${
-                canScrollLeft
-                  ? "bg-white/30 text-white hover:bg-white/60"
-                  : "bg-white/10 text-white/30 cursor-not-allowed"
-              }`}
+              onClick={() => scroll(scrollRefMobile, "left")}
+              className="bg-white/30 text-white p-2 rounded-full hover:bg-white/60 transition"
             >
               &#8249;
             </button>
             <button
-              onClick={() => scroll("right")}
-              disabled={!canScrollRight}
-              className={`p-2 rounded-full transition ${
-                canScrollRight
-                  ? "bg-white/30 text-white hover:bg-white/60"
-                  : "bg-white/10 text-white/30 cursor-not-allowed"
-              }`}
+              onClick={() => scroll(scrollRefMobile, "right")}
+              className="bg-white/30 text-white p-2 rounded-full hover:bg-white/60 transition"
             >
               &#8250;
             </button>
@@ -118,14 +113,13 @@ const Reels = () => {
 
           {/* Scrollable Container */}
           <div
-            ref={scrollRef}
-            className="flex gap-6 overflow-x-auto scroll-smooth py-2 px-4 snap-x snap-mandatory"
-            style={{ paddingBottom: "10px" }}
+            ref={scrollRefMobile}
+            className="flex gap-4 overflow-x-auto scroll-smooth py-2 px-2 snap-x snap-mandatory"
           >
             {reels.map((reel) => (
               <div
                 key={reel.id}
-                className="flex-shrink-0 w-72 overflow-visible rounded-xl transform transition duration-500 ease-in-out hover:scale-105 drop-shadow-xl snap-center"
+                className="flex-shrink-0 w-72 overflow-hidden rounded-xl transform transition duration-500 ease-in-out hover:scale-105 drop-shadow-xl snap-center"
               >
                 <video
                   src={reel.src}
