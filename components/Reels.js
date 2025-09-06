@@ -10,10 +10,14 @@ const reels = [
 const ReelsSection = () => {
   const [isPlaying, setIsPlaying] = useState({});
   const [loaded, setLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Trigger fade-in once component mounts
   useEffect(() => {
+    // Fade-in effect
     setLoaded(true);
+
+    // Detect mobile on client only
+    setIsMobile(window.innerWidth <= 768);
   }, []);
 
   const handlePlay = (id) => {
@@ -30,7 +34,7 @@ const ReelsSection = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Optional overlay */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black/40"></div>
 
       <div className="relative z-10 container mx-auto px-4">
@@ -52,25 +56,21 @@ const ReelsSection = () => {
                 loaded ? "opacity-100" : "opacity-0"
               }`}
             >
-              {/* Video */}
               <video
                 src={reel.src}
-                autoPlay
+                autoPlay={!isMobile} // autoplay only on desktop
                 loop
                 muted
                 playsInline
                 className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
-                onClick={() => handlePlay(reel.id)}
+                onClick={() => isMobile && handlePlay(reel.id)}
                 style={{
-                  display:
-                    isPlaying[reel.id] || window.innerWidth > 768
-                      ? "block"
-                      : "none",
+                  display: !isMobile || isPlaying[reel.id] ? "block" : "none",
                 }}
               />
 
-              {/* Fallback play button for mobile */}
-              {!isPlaying[reel.id] && window.innerWidth <= 768 && (
+              {/* Mobile play overlay */}
+              {isMobile && !isPlaying[reel.id] && (
                 <div
                   className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer"
                   onClick={() => handlePlay(reel.id)}
