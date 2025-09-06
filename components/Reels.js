@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 
 const reels = [
   { id: 1, src: "/reel-1.mp4" },
@@ -10,10 +10,7 @@ const reels = [
 
 const Reels = () => {
   const scrollRef = useRef(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
 
-  // Scroll function
   const scroll = (direction) => {
     if (scrollRef.current) {
       const { clientWidth } = scrollRef.current;
@@ -23,24 +20,6 @@ const Reels = () => {
       });
     }
   };
-
-  // Update arrow states based on scroll position
-  const updateArrows = () => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1);
-    }
-  };
-
-  useEffect(() => {
-    const container = scrollRef.current;
-    if (container) {
-      container.addEventListener("scroll", updateArrows);
-      updateArrows();
-      return () => container.removeEventListener("scroll", updateArrows);
-    }
-  }, []);
 
   return (
     <section
@@ -71,7 +50,7 @@ const Reels = () => {
           stage of development.
         </p>
 
-        {/* Desktop Grid */}
+        {/* Desktop Grid (unchanged) */}
         <div className="hidden md:grid grid-cols-4 gap-6">
           {reels.map((reel) => (
             <div
@@ -96,23 +75,13 @@ const Reels = () => {
           <div className="flex justify-between absolute top-1/2 left-0 right-0 px-2 z-20">
             <button
               onClick={() => scroll("left")}
-              disabled={!canScrollLeft}
-              className={`p-2 rounded-full transition ${
-                canScrollLeft
-                  ? "bg-white/30 text-white hover:bg-white/60"
-                  : "bg-white/10 text-white/30 cursor-not-allowed"
-              }`}
+              className="bg-white/30 text-white p-2 rounded-full hover:bg-white/60 transition"
             >
               &#8249;
             </button>
             <button
               onClick={() => scroll("right")}
-              disabled={!canScrollRight}
-              className={`p-2 rounded-full transition ${
-                canScrollRight
-                  ? "bg-white/30 text-white hover:bg-white/60"
-                  : "bg-white/10 text-white/30 cursor-not-allowed"
-              }`}
+              className="bg-white/30 text-white p-2 rounded-full hover:bg-white/60 transition"
             >
               &#8250;
             </button>
@@ -121,13 +90,12 @@ const Reels = () => {
           {/* Scrollable Container */}
           <div
             ref={scrollRef}
-            className="flex gap-6 overflow-x-auto scroll-smooth py-2 px-4 snap-x snap-mandatory"
-            style={{ paddingBottom: "10px" }} // extra space for hover zoom
+            className="flex gap-4 overflow-x-auto scroll-smooth py-2 px-2 snap-x snap-mandatory"
           >
             {reels.map((reel) => (
               <div
                 key={reel.id}
-                className="flex-shrink-0 w-72 overflow-visible rounded-xl transform transition duration-500 ease-in-out hover:scale-105 drop-shadow-xl snap-center"
+                className="flex-shrink-0 w-72 overflow-hidden rounded-xl transform transition duration-500 ease-in-out hover:scale-105 drop-shadow-xl snap-center"
               >
                 <video
                   src={reel.src}
@@ -142,3 +110,8 @@ const Reels = () => {
           </div>
         </div>
       </div>
+    </section>
+  );
+};
+
+export default Reels;
