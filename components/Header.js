@@ -1,19 +1,34 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("top");
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      // Determine which section is in view
+      const topSection = document.getElementById("top");
+      const reelsSection = document.getElementById("reels");
+      const contactSection = document.getElementById("contact");
+
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+      if (contactSection && scrollPosition >= contactSection.offsetTop) {
+        setActiveSection("contact");
+      } else if (reelsSection && scrollPosition >= reelsSection.offsetTop) {
+        setActiveSection("reels");
+      } else {
+        setActiveSection("top");
+      }
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Smooth scroll function
   const scrollToSection = (id) => {
     if (id === "top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -23,8 +38,15 @@ const Header = () => {
         section.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
-    setMenuOpen(false); // close menu on mobile after click
+    setMenuOpen(false);
   };
+
+  const buttonClass = (section) =>
+    `px-3 py-2 transition ${
+      activeSection === section
+        ? "text-yellow-400 border-b-2 border-yellow-400"
+        : "text-white hover:text-gray-300"
+    }`;
 
   return (
     <header
@@ -43,32 +65,20 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6">
-          <button
-            onClick={() => scrollToSection("top")}
-            className="text-white hover:text-gray-300 transition"
-          >
+          <button onClick={() => scrollToSection("top")} className={buttonClass("top")}>
             Home
           </button>
-          <button
-            onClick={() => scrollToSection("reels")}
-            className="text-white hover:text-gray-300 transition"
-          >
+          <button onClick={() => scrollToSection("reels")} className={buttonClass("reels")}>
             Services
           </button>
-          <button
-            onClick={() => scrollToSection("contact")}
-            className="text-white hover:text-gray-300 transition"
-          >
+          <button onClick={() => scrollToSection("contact")} className={buttonClass("contact")}>
             Contact
           </button>
         </nav>
 
         {/* Mobile Burger Menu */}
-        <div className="md:hidden">
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="text-white focus:outline-none"
-          >
+        <div className="md:hidden relative">
+          <button onClick={() => setMenuOpen(!menuOpen)} className="text-white focus:outline-none">
             {menuOpen ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -77,12 +87,7 @@ const Header = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
               <svg
@@ -92,34 +97,34 @@ const Header = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             )}
           </button>
 
-          {/* Mobile Menu */}
           {menuOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-black/90 backdrop-blur-md rounded shadow-lg py-2 flex flex-col">
               <button
                 onClick={() => scrollToSection("top")}
-                className="px-4 py-2 text-white hover:bg-white/20 transition text-left"
+                className={`px-4 py-2 transition text-left ${
+                  activeSection === "top" ? "text-yellow-400" : "text-white hover:bg-white/20"
+                }`}
               >
                 Home
               </button>
               <button
                 onClick={() => scrollToSection("reels")}
-                className="px-4 py-2 text-white hover:bg-white/20 transition text-left"
+                className={`px-4 py-2 transition text-left ${
+                  activeSection === "reels" ? "text-yellow-400" : "text-white hover:bg-white/20"
+                }`}
               >
                 Services
               </button>
               <button
                 onClick={() => scrollToSection("contact")}
-                className="px-4 py-2 text-white hover:bg-white/20 transition text-left"
+                className={`px-4 py-2 transition text-left ${
+                  activeSection === "contact" ? "text-yellow-400" : "text-white hover:bg-white/20"
+                }`}
               >
                 Contact
               </button>
