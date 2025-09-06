@@ -2,18 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  padding: 0;
-  margin: 0;
-  font-family: 'Inter', sans-serif;
+/* Custom Styles (Optional) */
+body {
+  @apply bg-black text-white;
 }
 
-/* Portrait video wrapper */
-.video-container {
-  @apply w-full max-w-[400px] aspect-[9/16] mx-auto;
+video {
+  @apply rounded-lg;
 }
-
-.video-container video {
-  @apply w-full h-full object-contain;
-}
-
