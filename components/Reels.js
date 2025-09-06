@@ -31,9 +31,11 @@ const ReelsSection = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
+      {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/60"></div>
 
       <div className="relative z-10 container mx-auto px-4 text-center">
+        {/* Headings */}
         <h3 className="text-sm md:text-base font-semibold text-white/90 uppercase tracking-widest mb-2 drop-shadow-md">
           Our Services
         </h3>
@@ -48,7 +50,7 @@ const ReelsSection = () => {
           stage of development.
         </p>
 
-        {/* Arrows for desktop */}
+        {/* Desktop arrows */}
         <div className="hidden md:flex justify-between absolute top-1/2 left-0 right-0 px-4 z-20">
           <button
             onClick={() => scroll("left")}
@@ -67,21 +69,24 @@ const ReelsSection = () => {
         {/* Horizontal scroll container */}
         <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto scroll-smooth pb-4"
+          className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 touch-pan-x"
         >
           {reels.map((reel) => (
             <div
               key={reel.id}
-              className="flex-shrink-0 w-72 overflow-hidden rounded-xl transform transition duration-500 ease-in-out hover:scale-105 drop-shadow-xl"
+              className="flex-shrink-0 w-72 rounded-xl drop-shadow-xl relative transform transition duration-500 ease-in-out hover:scale-105 snap-center"
             >
-              <video
-                src={reel.src}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-contain transform transition duration-500 ease-in-out hover:scale-110"
-              />
+              {/* Inner wrapper allows double zoom without cropping */}
+              <div className="w-full h-full overflow-visible">
+                <video
+                  src={reel.src}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover transform transition duration-500 ease-in-out hover:scale-110 origin-center"
+                />
+              </div>
             </div>
           ))}
         </div>
