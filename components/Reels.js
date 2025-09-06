@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const reels = [
   { id: 1, src: "/reel-1.mp4" },
@@ -9,6 +9,12 @@ const reels = [
 
 const ReelsSection = () => {
   const [isPlaying, setIsPlaying] = useState({});
+  const [loaded, setLoaded] = useState(false);
+
+  // Trigger fade-in once component mounts
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
 
   const handlePlay = (id) => {
     setIsPlaying((prev) => ({ ...prev, [id]: true }));
@@ -29,7 +35,11 @@ const ReelsSection = () => {
 
       <div className="relative z-10 container mx-auto px-4">
         {/* Title */}
-        <h2 className="text-4xl font-bold text-white text-center mb-8">
+        <h2
+          className={`text-4xl font-bold text-white text-center mb-8 transition-opacity duration-1000 ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
+        >
           Reels & Highlights
         </h2>
 
@@ -38,7 +48,9 @@ const ReelsSection = () => {
           {reels.map((reel) => (
             <div
               key={reel.id}
-              className="overflow-hidden rounded-xl relative group"
+              className={`overflow-hidden rounded-xl relative group transition-opacity duration-1000 ${
+                loaded ? "opacity-100" : "opacity-0"
+              }`}
             >
               {/* Video */}
               <video
@@ -48,7 +60,6 @@ const ReelsSection = () => {
                 muted
                 playsInline
                 className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
-                // Mobile autoplay fix: only play if user tapped
                 onClick={() => handlePlay(reel.id)}
                 style={{
                   display:
