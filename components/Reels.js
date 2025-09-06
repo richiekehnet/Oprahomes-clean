@@ -39,9 +39,7 @@ const ReelsSection = () => {
           {reels.map((reel) => (
             <div
               key={reel.id}
-              className={`overflow-hidden rounded-xl relative group transition-opacity duration-1000 ${
-                loaded ? "opacity-100" : "opacity-0"
-              }`}
+              className="overflow-hidden rounded-xl relative group"
             >
               <video
                 src={reel.src}
@@ -49,7 +47,7 @@ const ReelsSection = () => {
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-105"
               />
             </div>
           ))}
