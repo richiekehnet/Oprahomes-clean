@@ -13,6 +13,15 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Smooth scroll function
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    setMenuOpen(false); // close menu on mobile after click
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
@@ -29,15 +38,18 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6">
-          <a
-            href="#reels"
+          <button
+            onClick={() => scrollToSection("reels")}
             className="text-white hover:text-gray-300 transition"
           >
             Services
-          </a>
-          <Link href="#contact">
-            <a className="text-white hover:text-gray-300 transition">Contact</a>
-          </Link>
+          </button>
+          <button
+            onClick={() => scrollToSection("contact")}
+            className="text-white hover:text-gray-300 transition"
+          >
+            Contact
+          </button>
         </nav>
 
         {/* Mobile Burger Menu */}
@@ -82,20 +94,18 @@ const Header = () => {
           {/* Mobile Menu */}
           {menuOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-black/90 backdrop-blur-md rounded shadow-lg py-2 flex flex-col">
-              <a
-                href="#reels"
-                onClick={() => setMenuOpen(false)}
-                className="px-4 py-2 text-white hover:bg-white/20 transition"
+              <button
+                onClick={() => scrollToSection("reels")}
+                className="px-4 py-2 text-white hover:bg-white/20 transition text-left"
               >
                 Services
-              </a>
-              <a
-                href="#contact"
-                onClick={() => setMenuOpen(false)}
-                className="px-4 py-2 text-white hover:bg-white/20 transition"
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="px-4 py-2 text-white hover:bg-white/20 transition text-left"
               >
                 Contact
-              </a>
+              </button>
             </div>
           )}
         </div>
