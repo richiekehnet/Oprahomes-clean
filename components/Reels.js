@@ -9,10 +9,10 @@ const reels = [
 ];
 
 const Reels = () => {
-  const scrollRefMobile = useRef(null);
   const scrollRefDesktop = useRef(null);
+  const scrollRefMobile = useRef(null);
 
-  const scroll = (ref, direction) => {
+  const scroll = (direction, ref) => {
     if (ref.current) {
       const { clientWidth } = ref.current;
       ref.current.scrollBy({
@@ -51,34 +51,33 @@ const Reels = () => {
           stage of development.
         </p>
 
-        {/* Desktop Horizontal Scroll (NEW) */}
+        {/* Desktop Horizontal Scroll with Scroll Snap */}
         <div className="hidden md:block relative">
           {/* Scroll Arrows */}
           <div className="flex justify-between absolute top-1/2 left-0 right-0 px-2 z-20">
             <button
-              onClick={() => scroll(scrollRefDesktop, "left")}
+              onClick={() => scroll("left", scrollRefDesktop)}
               className="bg-white/30 text-white p-2 rounded-full hover:bg-white/60 transition"
             >
               &#8249;
             </button>
             <button
-              onClick={() => scroll(scrollRefDesktop, "right")}
+              onClick={() => scroll("right", scrollRefDesktop)}
               className="bg-white/30 text-white p-2 rounded-full hover:bg-white/60 transition"
             >
               &#8250;
             </button>
           </div>
 
-          {/* Scrollable Grid Container */}
+          {/* Scrollable Desktop Container */}
           <div
             ref={scrollRefDesktop}
-            className="flex gap-6 overflow-x-auto scroll-smooth py-2 px-2"
-            style={{ paddingBottom: "20px" }}
+            className="flex gap-6 overflow-x-auto scroll-smooth py-2 px-2 snap-x snap-mandatory"
           >
             {reels.map((reel) => (
               <div
                 key={reel.id}
-                className="flex-shrink-0 w-[23%] overflow-hidden rounded-xl transform transition duration-500 ease-in-out hover:scale-105 drop-shadow-xl"
+                className="flex-shrink-0 w-72 overflow-hidden rounded-xl transform transition duration-500 ease-in-out hover:scale-105 drop-shadow-xl snap-center"
               >
                 <video
                   src={reel.src}
@@ -98,20 +97,20 @@ const Reels = () => {
           {/* Scroll Arrows */}
           <div className="flex justify-between absolute top-1/2 left-0 right-0 px-2 z-20">
             <button
-              onClick={() => scroll(scrollRefMobile, "left")}
+              onClick={() => scroll("left", scrollRefMobile)}
               className="bg-white/30 text-white p-2 rounded-full hover:bg-white/60 transition"
             >
               &#8249;
             </button>
             <button
-              onClick={() => scroll(scrollRefMobile, "right")}
+              onClick={() => scroll("right", scrollRefMobile)}
               className="bg-white/30 text-white p-2 rounded-full hover:bg-white/60 transition"
             >
               &#8250;
             </button>
           </div>
 
-          {/* Scrollable Container */}
+          {/* Scrollable Mobile Container */}
           <div
             ref={scrollRefMobile}
             className="flex gap-4 overflow-x-auto scroll-smooth py-2 px-2 snap-x snap-mandatory"
