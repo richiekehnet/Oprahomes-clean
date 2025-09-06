@@ -18,11 +18,11 @@ const ReelsSection = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Cinematic dark overlay */}
-      <div className="absolute inset-0 bg-black/60"></div>
+      {/* Optional overlay to make text readable */}
+      <div className="absolute inset-0 bg-black/40"></div>
 
       <div className="relative z-10 container mx-auto px-4">
-        {/* Section Title */}
+        {/* Title without hover effects */}
         <h2 className="text-4xl font-bold text-white text-center mb-8">
           Reels & Highlights
         </h2>
@@ -32,7 +32,7 @@ const ReelsSection = () => {
           {reels.map((reel) => (
             <div
               key={reel.id}
-              className="overflow-hidden rounded-xl bg-black"
+              className="overflow-hidden rounded-xl"
             >
               <video
                 src={reel.src}
