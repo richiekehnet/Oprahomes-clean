@@ -1,20 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("top");
+  const navRef = useRef(null);
+  const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
+
+  const sections = [
+    { id: "top", label: "Home" },
+    { id: "reels", label: "Services" },
+    { id: "contact", label: "Contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      // Determine which section is in view
-      const topSection = document.getElementById("top");
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
       const reelsSection = document.getElementById("reels");
       const contactSection = document.getElementById("contact");
-
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
 
       if (contactSection && scrollPosition >= contactSection.offsetTop) {
         setActiveSection("contact");
@@ -26,27 +31,35 @@ const Header = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll(); // initial check
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    // Update sliding underline
+    if (navRef.current) {
+      const buttons = navRef.current.querySelectorAll("button[data-section]");
+      const activeButton = Array.from(buttons).find(
+        (btn) => btn.dataset.section === activeSection
+      );
+      if (activeButton) {
+        setUnderlineStyle({
+          left: activeButton.offsetLeft,
+          width: activeButton.offsetWidth,
+        });
+      }
+    }
+  }, [activeSection, isScrolled]);
 
   const scrollToSection = (id) => {
     if (id === "top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       const section = document.getElementById(id);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
     }
     setMenuOpen(false);
   };
-
-  const buttonClass = (section) =>
-    `px-3 py-2 transition ${
-      activeSection === section
-        ? "text-yellow-400 border-b-2 border-yellow-400"
-        : "text-white hover:text-gray-300"
-    }`;
 
   return (
     <header
@@ -54,7 +67,7 @@ const Header = () => {
         isScrolled ? "bg-black/90 backdrop-blur-md py-3" : "bg-transparent py-5"
       }`}
     >
-      <div className="container mx-auto px-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 flex items-center justify-between relative">
         {/* Logo */}
         <button
           onClick={() => scrollToSection("top")}
@@ -64,16 +77,26 @@ const Header = () => {
         </button>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6">
-          <button onClick={() => scrollToSection("top")} className={buttonClass("top")}>
-            Home
-          </button>
-          <button onClick={() => scrollToSection("reels")} className={buttonClass("reels")}>
-            Services
-          </button>
-          <button onClick={() => scrollToSection("contact")} className={buttonClass("contact")}>
-            Contact
-          </button>
+        <nav
+          ref={navRef}
+          className="hidden md:flex space-x-6 relative"
+        >
+          {sections.map((section) => (
+            <button
+              key={section.id}
+              data-section={section.id}
+              onClick={() => scrollToSection(section.id)}
+              className="px-3 py-2 text-white hover:text-gray-300 relative transition"
+            >
+              {section.label}
+            </button>
+          ))}
+
+          {/* Sliding underline */}
+          <div
+            className="absolute bottom-0 h-1 bg-yellow-400 transition-all duration-300"
+            style={{ left: underlineStyle.left, width: underlineStyle.width }}
+          />
         </nav>
 
         {/* Mobile Burger Menu */}
@@ -104,30 +127,19 @@ const Header = () => {
 
           {menuOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-black/90 backdrop-blur-md rounded shadow-lg py-2 flex flex-col">
-              <button
-                onClick={() => scrollToSection("top")}
-                className={`px-4 py-2 transition text-left ${
-                  activeSection === "top" ? "text-yellow-400" : "text-white hover:bg-white/20"
-                }`}
-              >
-                Home
-              </button>
-              <button
-                onClick={() => scrollToSection("reels")}
-                className={`px-4 py-2 transition text-left ${
-                  activeSection === "reels" ? "text-yellow-400" : "text-white hover:bg-white/20"
-                }`}
-              >
-                Services
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className={`px-4 py-2 transition text-left ${
-                  activeSection === "contact" ? "text-yellow-400" : "text-white hover:bg-white/20"
-                }`}
-              >
-                Contact
-              </button>
+              {sections.map((section) => (
+                <button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  className={`px-4 py-2 text-left transition ${
+                    activeSection === section.id
+                      ? "text-yellow-400"
+                      : "text-white hover:bg-white/20"
+                  }`}
+                >
+                  {section.label}
+                </button>
+              ))}
             </div>
           )}
         </div>
