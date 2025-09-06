@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 const reels = [
   { id: 1, src: "/reel-1.mp4" },
@@ -10,17 +10,10 @@ const reels = [
 
 const Reels = () => {
   const scrollRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
-  // Detect mobile
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Desktop scroll buttons
+  // Scroll function
   const scroll = (direction) => {
     if (scrollRef.current) {
       const { clientWidth } = scrollRef.current;
@@ -31,31 +24,23 @@ const Reels = () => {
     }
   };
 
-  // Mobile infinite scroll
+  // Update arrow states based on scroll position
+  const updateArrows = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1);
+    }
+  };
+
   useEffect(() => {
-    if (!isMobile) return;
-
     const container = scrollRef.current;
-    let scrollInterval;
-
-    const startInfiniteScroll = () => {
-      scrollInterval = setInterval(() => {
-        if (!container) return;
-
-        // Scroll by 1px
-        container.scrollLeft += 1;
-
-        // Reset scroll when reaching the end
-        if (container.scrollLeft >= container.scrollWidth / 2) {
-          container.scrollLeft = 0;
-        }
-      }, 20); // adjust speed here
-    };
-
-    startInfiniteScroll();
-
-    return () => clearInterval(scrollInterval);
-  }, [isMobile]);
+    if (container) {
+      container.addEventListener("scroll", updateArrows);
+      updateArrows();
+      return () => container.removeEventListener("scroll", updateArrows);
+    }
+  }, []);
 
   return (
     <section
@@ -111,13 +96,23 @@ const Reels = () => {
           <div className="flex justify-between absolute top-1/2 left-0 right-0 px-2 z-20">
             <button
               onClick={() => scroll("left")}
-              className="bg-white/30 text-white p-2 rounded-full hover:bg-white/60 transition"
+              disabled={!canScrollLeft}
+              className={`p-2 rounded-full transition ${
+                canScrollLeft
+                  ? "bg-white/30 text-white hover:bg-white/60"
+                  : "bg-white/10 text-white/30 cursor-not-allowed"
+              }`}
             >
               &#8249;
             </button>
             <button
               onClick={() => scroll("right")}
-              className="bg-white/30 text-white p-2 rounded-full hover:bg-white/60 transition"
+              disabled={!canScrollRight}
+              className={`p-2 rounded-full transition ${
+                canScrollRight
+                  ? "bg-white/30 text-white hover:bg-white/60"
+                  : "bg-white/10 text-white/30 cursor-not-allowed"
+              }`}
             >
               &#8250;
             </button>
@@ -126,12 +121,12 @@ const Reels = () => {
           {/* Scrollable Container */}
           <div
             ref={scrollRef}
-            className="flex gap-4 overflow-x-visible scroll-smooth py-2 px-6 snap-x snap-mandatory"
+            className="flex gap-6 overflow-x-auto scroll-smooth py-2 px-4 snap-x snap-mandatory"
+            style={{ paddingBottom: "10px" }} // extra space for hover zoom
           >
-            {/* Duplicate reels for seamless infinite scroll */}
-            {[...reels, ...reels].map((reel, index) => (
+            {reels.map((reel) => (
               <div
-                key={index}
+                key={reel.id}
                 className="flex-shrink-0 w-72 overflow-visible rounded-xl transform transition duration-500 ease-in-out hover:scale-105 drop-shadow-xl snap-center"
               >
                 <video
@@ -147,8 +142,3 @@ const Reels = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
-};
-
-export default Reels;
