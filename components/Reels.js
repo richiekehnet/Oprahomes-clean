@@ -18,19 +18,21 @@ const ReelsSection = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
+      {/* Overlay for readability */}
       <div className="absolute inset-0 bg-black/40"></div>
 
       <div className="relative z-10 container mx-auto px-4">
+        {/* Section Title */}
         <h2 className="text-4xl font-bold text-white text-center mb-8">
           Reels & Highlights
         </h2>
 
+        {/* Video Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {reels.map((reel) => (
             <div
               key={reel.id}
-              className="overflow-hidden rounded-xl group transition-transform duration-300 ease-in-out hover:scale-105"
-              style={{ aspectRatio: "9 / 16" }}
+              className="overflow-hidden rounded-xl transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/30"
             >
               <video
                 src={reel.src}
@@ -38,7 +40,7 @@ const ReelsSection = () => {
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                className="w-full h-full object-contain transform transition duration-500 hover:scale-110"
               />
             </div>
           ))}
