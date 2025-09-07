@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Hero = () => {
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    // Start animation 1.5s after page load
+    const timer = setTimeout(() => setAnimate(true), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   // Smooth scroll function
   const scrollToSection = (id) => {
     if (id === "top") {
@@ -28,59 +36,43 @@ const Hero = () => {
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center px-4">
         {/* Headline */}
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg opacity-0 animate-fadeInUp delay-100">
+        <h1
+          className={`text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg transform transition-all duration-700 ${
+            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           Where the finest homes meet cinematic marketing.
         </h1>
 
-        {/* Description */}
-        <p className="text-white/80 text-lg md:text-2xl mb-6 drop-shadow-md max-w-xl opacity-0 animate-fadeInUp delay-200">
-          From Calgary to across provinces, Oprahomes elevates every property with cinematic storytelling.
+        {/* Subtext */}
+        <p
+          className={`text-white text-lg md:text-2xl mb-6 drop-shadow-md transform transition-all duration-700 delay-150 ${
+            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          Realtor | Videographer | Oprahomes
         </p>
 
         {/* Buttons */}
-        <div className="flex gap-4 flex-wrap justify-center mt-4 opacity-0 animate-fadeInUp delay-300">
+        <div
+          className={`flex gap-4 flex-wrap justify-center transform transition-all duration-700 delay-300 ${
+            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           <button
             onClick={() => scrollToSection("reels")}
-            className="px-6 py-3 border border-white text-white font-semibold rounded transition duration-300 hover:bg-white/20 focus:bg-white/30 active:bg-white/40"
-            aria-label="View listings"
+            className="px-6 py-3 rounded border border-white text-white hover:bg-white hover:text-black transition-all duration-300"
           >
             View Listings
           </button>
           <button
             onClick={() => scrollToSection("contact")}
-            className="px-6 py-3 border border-white text-white font-semibold rounded transition duration-300 hover:bg-white/20 focus:bg-white/30 active:bg-white/40"
-            aria-label="Book consultation"
+            className="px-6 py-3 rounded border border-white text-white hover:bg-white hover:text-black transition-all duration-300"
           >
             Book Consultation
           </button>
         </div>
       </div>
-
-      {/* Animation styles */}
-      <style jsx>{`
-        .animate-fadeInUp {
-          animation: fadeInUp 1s forwards;
-        }
-        .delay-100 {
-          animation-delay: 0.1s;
-        }
-        .delay-200 {
-          animation-delay: 0.2s;
-        }
-        .delay-300 {
-          animation-delay: 0.3s;
-        }
-        @keyframes fadeInUp {
-          0% {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </section>
   );
 };
