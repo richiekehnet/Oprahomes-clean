@@ -46,16 +46,16 @@ const Hero = () => {
 
         {/* Subtext */}
         <p
-          className={`text-white text-lg md:text-2xl mb-6 drop-shadow-md transform transition-all duration-700 delay-150 ${
+          className={`text-white text-lg md:text-2xl mb-6 drop-shadow-md transform transition-all duration-700 delay-200 ${
             animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          Realtor | Videographer | Oprahomes
+          From Calgary to across provinces, Oprahomes elevates every property with cinematic storytelling.
         </p>
 
         {/* Buttons */}
         <div
-          className={`flex gap-4 flex-wrap justify-center transform transition-all duration-700 delay-300 ${
+          className={`flex gap-4 flex-wrap justify-center transform transition-all duration-700 delay-400 ${
             animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
