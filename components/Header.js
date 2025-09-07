@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Smooth scroll function
   const scrollToSection = (id) => {
     if (id === "top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       const section = document.getElementById(id);
-      if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
-    setMenuOpen(false); // close mobile menu after click
+    setMenuOpen(false); // close menu on mobile after click
   };
 
   return (
@@ -25,33 +31,38 @@ const Header = () => {
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         isScrolled ? "bg-black/90 backdrop-blur-md py-3" : "bg-transparent py-5"
       }`}
+      role="banner"
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <button
           onClick={() => scrollToSection("top")}
           className="text-white text-2xl font-bold tracking-widest drop-shadow-lg"
+          aria-label="Go to top of page"
         >
           Oprahomes
         </button>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6">
+        <nav className="hidden md:flex space-x-6" role="navigation" aria-label="Main navigation">
           <button
             onClick={() => scrollToSection("top")}
             className="text-white hover:text-gray-300 transition"
+            aria-label="Go to top of page"
           >
             Home
           </button>
           <button
             onClick={() => scrollToSection("reels")}
             className="text-white hover:text-gray-300 transition"
+            aria-label="Go to services section"
           >
             Services
           </button>
           <button
             onClick={() => scrollToSection("contact")}
             className="text-white hover:text-gray-300 transition"
+            aria-label="Go to contact section"
           >
             Contact
           </button>
@@ -62,6 +73,7 @@ const Header = () => {
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="text-white focus:outline-none"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
           >
             {menuOpen ? (
               <svg
@@ -70,6 +82,7 @@ const Header = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -85,6 +98,7 @@ const Header = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -98,22 +112,32 @@ const Header = () => {
 
           {/* Mobile Menu */}
           {menuOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-black/90 backdrop-blur-md rounded shadow-lg py-2 flex flex-col">
+            <div
+              className="absolute right-0 mt-2 w-48 bg-black/90 backdrop-blur-md rounded shadow-lg py-2 flex flex-col"
+              role="menu"
+              aria-label="Mobile navigation menu"
+            >
               <button
                 onClick={() => scrollToSection("top")}
                 className="px-4 py-2 text-white hover:bg-white/20 transition text-left"
+                aria-label="Go to top of page"
+                role="menuitem"
               >
                 Home
               </button>
               <button
                 onClick={() => scrollToSection("reels")}
                 className="px-4 py-2 text-white hover:bg-white/20 transition text-left"
+                aria-label="Go to services section"
+                role="menuitem"
               >
                 Services
               </button>
               <button
                 onClick={() => scrollToSection("contact")}
                 className="px-4 py-2 text-white hover:bg-white/20 transition text-left"
+                aria-label="Go to contact section"
+                role="menuitem"
               >
                 Contact
               </button>
