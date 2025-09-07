@@ -37,8 +37,8 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center px-4">
         {/* Headline */}
         <h1
-          className={`text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg transform transition-all duration-700 ${
-            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          className={`text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg transform transition-all duration-1000 ease-out ${
+            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
           }`}
         >
           Where the finest homes meet cinematic marketing.
@@ -46,8 +46,8 @@ const Hero = () => {
 
         {/* Subtext */}
         <p
-          className={`text-white text-lg md:text-2xl mb-6 drop-shadow-md transform transition-all duration-700 delay-200 ${
-            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          className={`text-white text-lg md:text-2xl mb-6 drop-shadow-md transform transition-all duration-1000 ease-out delay-200 ${
+            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
           }`}
         >
           From Calgary to across provinces, Oprahomes elevates every property with cinematic storytelling.
@@ -55,8 +55,8 @@ const Hero = () => {
 
         {/* Buttons */}
         <div
-          className={`flex gap-4 flex-wrap justify-center transform transition-all duration-700 delay-400 ${
-            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          className={`flex gap-4 flex-wrap justify-center transform transition-all duration-1000 ease-out delay-400 ${
+            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
           }`}
         >
           <button
