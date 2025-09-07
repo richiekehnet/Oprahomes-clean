@@ -4,12 +4,10 @@ const Hero = () => {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    // Start animation 1.5s after page load
     const timer = setTimeout(() => setAnimate(true), 1500);
     return () => clearTimeout(timer);
   }, []);
 
-  // Smooth scroll function
   const scrollToSection = (id) => {
     if (id === "top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -38,7 +36,9 @@ const Hero = () => {
         {/* Headline */}
         <h1
           className={`text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg transform transition-all duration-1000 ease-out ${
-            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+            animate
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8 md:translate-y-12"
           }`}
         >
           Where the finest homes meet cinematic marketing.
@@ -47,7 +47,9 @@ const Hero = () => {
         {/* Subtext */}
         <p
           className={`text-white text-lg md:text-2xl mb-6 drop-shadow-md transform transition-all duration-1000 ease-out delay-200 ${
-            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+            animate
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-6 md:translate-y-12"
           }`}
         >
           From Calgary to across provinces, Oprahomes elevates every property with cinematic storytelling.
@@ -56,7 +58,9 @@ const Hero = () => {
         {/* Buttons */}
         <div
           className={`flex gap-4 flex-wrap justify-center transform transition-all duration-1000 ease-out delay-400 ${
-            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+            animate
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-6 md:translate-y-12"
           }`}
         >
           <button
