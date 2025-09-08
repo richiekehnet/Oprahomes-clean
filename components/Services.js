@@ -18,7 +18,7 @@ const Services = () => {
       icon: "🚁",
       title: "Drone",
       desc: "Aerial footage showcasing properties cinematically.",
-      extra: "Our drone footage captures unique perspectives of properties, ideal for listings and marketing campaigns.",
+      extra: "Our drone footage captures unique perspectives of properties, construction projects, ideal for listings and marketing campaigns.",
     },
     {
       icon: "📸",
@@ -63,7 +63,6 @@ const Services = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
         {services.map((service, idx) => (
-          // Wrap each card in a flex container to isolate its height
           <div key={idx} className="flex flex-col">
             <div
               onClick={() => toggleExpand(idx)}
@@ -73,7 +72,7 @@ const Services = () => {
               <h3 className="text-xl font-bold mb-2">{service.title}</h3>
               <p>{service.desc}</p>
 
-              {/* Dynamic slide-down */}
+              {/* Dynamic slide-down with fade-in */}
               <div
                 ref={(el) => (refs.current[idx] = el)}
                 style={{
@@ -85,7 +84,13 @@ const Services = () => {
                   marginTop: expanded[idx] ? "1rem" : "0",
                 }}
               >
-                <p className="text-sm text-gray-600">{service.extra}</p>
+                <p
+                  className={`text-sm text-gray-600 transition-opacity duration-500 ${
+                    expanded[idx] ? "opacity-100" : "opacity-0"
+                  }`}
+                >
+                  {service.extra}
+                </p>
               </div>
             </div>
           </div>
