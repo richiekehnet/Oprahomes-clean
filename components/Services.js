@@ -13,31 +13,21 @@ const Services = () => {
       id="services"
       className="py-20 px-4 text-center relative overflow-hidden"
       style={{
-        background: "linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%)",
+        background: "linear-gradient(-45deg, #f9fafb, #f3f4f6, #e0e7ff, #fef3c7)",
+        backgroundSize: "400% 400%",
+        animation: "gradientShift 15s ease infinite",
       }}
     >
-      {/* Subtle abstract pattern using SVG */}
-      <div className="absolute inset-0 pointer-events-none">
-        <svg
-          className="w-full h-full"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <pattern
-              id="pattern"
-              x="0"
-              y="0"
-              width="40"
-              height="40"
-              patternUnits="userSpaceOnUse"
-            >
-              <circle cx="1" cy="1" r="1" fill="rgba(0,0,0,0.02)" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#pattern)" />
-        </svg>
-      </div>
+      {/* Animated gradient keyframes */}
+      <style>
+        {`
+          @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+        `}
+      </style>
 
       <h2 className="relative text-3xl md:text-4xl font-bold mb-12 z-10">Our Services</h2>
 
