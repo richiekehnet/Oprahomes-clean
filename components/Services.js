@@ -13,8 +13,11 @@ const Services = () => {
       id="services"
       className="py-20 px-4 text-center relative overflow-hidden"
       style={{
-        background: "linear-gradient(-45deg, #f9fafb, #f3f4f6, #e0e7ff, #fef3c7)",
-        backgroundSize: "400% 400%",
+        background: `
+          linear-gradient(-45deg, #f9fafb, #f3f4f6, #e0e7ff, #fef3c7),
+          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.05"/></svg>')`,
+        backgroundBlendMode: "overlay",
+        backgroundSize: "400% 400%, cover",
         animation: "gradientShift 15s ease infinite",
       }}
     >
@@ -22,9 +25,9 @@ const Services = () => {
       <style>
         {`
           @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% { background-position: 0% 50%, center; }
+            50% { background-position: 100% 50%, center; }
+            100% { background-position: 0% 50%, center; }
           }
         `}
       </style>
