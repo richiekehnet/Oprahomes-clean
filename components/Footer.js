@@ -1,13 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Get scroll position and window height
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.body.scrollHeight;
+
+      // Trigger fade-in when user is near the bottom 200px
+      if (scrollY + windowHeight >= documentHeight - 200) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <footer className="bg-gray-900 text-white py-8 text-center">
+    <footer className="bg-gray-900 text-white py-8 text-center relative overflow-hidden">
       <p className="mb-4">&copy; {new Date().getFullYear()} Oprahomes. All rights reserved.</p>
 
       {/* Social Media Buttons */}
-      <div className="flex justify-center gap-6 mb-2">
+      <div
+        className={`flex justify-center gap-6 mb-2 transition-opacity duration-1000 ease-in-out ${
+          visible ? "opacity-100" : "opacity-0"
+        }`}
+      >
         <a
           href="https://www.instagram.com/oprahomes"
           target="_blank"
@@ -37,11 +62,9 @@ const Footer = () => {
         </a>
       </div>
 
-      {/* Optional small subtext */}
       <p className="text-gray-500 text-sm">Follow us for cinematic property stories</p>
     </footer>
   );
 };
 
 export default Footer;
-
