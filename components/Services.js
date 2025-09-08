@@ -16,7 +16,7 @@ const Services = () => {
         background: "linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%)",
       }}
     >
-      {/* Subtle abstract pattern using pseudo-elements */}
+      {/* Subtle abstract pattern using SVG */}
       <div className="absolute inset-0 pointer-events-none">
         <svg
           className="w-full h-full"
@@ -40,3 +40,21 @@ const Services = () => {
       </div>
 
       <h2 className="relative text-3xl md:text-4xl font-bold mb-12 z-10">Our Services</h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+        {services.map((service, idx) => (
+          <div
+            key={idx}
+            className="p-6 bg-white shadow-lg rounded-lg transition transform hover:scale-105 hover:shadow-2xl"
+          >
+            <div className="text-4xl mb-4">{service.icon}</div>
+            <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+            <p>{service.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default Services;
