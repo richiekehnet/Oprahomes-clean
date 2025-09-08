@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 
 const Services = () => {
   const services = [
@@ -63,28 +63,30 @@ const Services = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
         {services.map((service, idx) => (
-          <div
-            key={idx}
-            onClick={() => toggleExpand(idx)}
-            className="p-6 bg-white shadow-lg rounded-lg transition transform hover:scale-105 hover:shadow-2xl cursor-pointer"
-          >
-            <div className="text-4xl mb-4">{service.icon}</div>
-            <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-            <p>{service.desc}</p>
-
-            {/* Dynamic slide-down */}
+          // Wrap each card in a flex container to isolate its height
+          <div key={idx} className="flex flex-col">
             <div
-              ref={(el) => (refs.current[idx] = el)}
-              style={{
-                maxHeight: expanded[idx]
-                  ? refs.current[idx]?.scrollHeight + "px"
-                  : "0px",
-                transition: "max-height 0.5s ease-in-out",
-                overflow: "hidden",
-                marginTop: expanded[idx] ? "1rem" : "0",
-              }}
+              onClick={() => toggleExpand(idx)}
+              className="p-6 bg-white shadow-lg rounded-lg transition transform hover:scale-105 hover:shadow-2xl cursor-pointer flex flex-col"
             >
-              <p className="text-sm text-gray-600">{service.extra}</p>
+              <div className="text-4xl mb-4">{service.icon}</div>
+              <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+              <p>{service.desc}</p>
+
+              {/* Dynamic slide-down */}
+              <div
+                ref={(el) => (refs.current[idx] = el)}
+                style={{
+                  maxHeight: expanded[idx]
+                    ? refs.current[idx]?.scrollHeight + "px"
+                    : "0px",
+                  transition: "max-height 0.5s ease-in-out",
+                  overflow: "hidden",
+                  marginTop: expanded[idx] ? "1rem" : "0",
+                }}
+              >
+                <p className="text-sm text-gray-600">{service.extra}</p>
+              </div>
             </div>
           </div>
         ))}
