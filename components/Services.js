@@ -1,14 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const Services = () => {
   const services = [
-    { icon: "🎥", title: "Videography", desc: "Cinematic videos that sell homes faster.", extra: "We craft cinematic property videos using high-end cameras and drones to showcase homes like never before." },
-    { icon: "🏡", title: "Buying & Selling", desc: "Expert guidance to achieve real estate goals.", extra: "From start to finish, we ensure a smooth buying or selling experience, with advice tailored to Calgary’s market." },
-    { icon: "🚁", title: "Drone", desc: "Aerial footage showcasing properties cinematically.", extra: "Our drone footage captures unique perspectives of properties, ideal for listings and marketing campaigns." },
-    { icon: "📸", title: "Branding", desc: "High-quality visuals to elevate your real estate brand.", extra: "We help realtors and developers create a cohesive brand identity with professional photos, videos, and design." },
+    {
+      icon: "🎥",
+      title: "Videography",
+      desc: "Cinematic videos that sell homes faster.",
+      extra: "We craft cinematic property videos using high-end cameras and drones to showcase homes like never before.",
+    },
+    {
+      icon: "🏡",
+      title: "Buying & Selling",
+      desc: "Expert guidance to achieve real estate goals.",
+      extra: "From start to finish, we ensure a smooth buying or selling experience, with advice tailored to Calgary’s market.",
+    },
+    {
+      icon: "🚁",
+      title: "Drone",
+      desc: "Aerial footage showcasing properties cinematically.",
+      extra: "Our drone footage captures unique perspectives of properties, ideal for listings and marketing campaigns.",
+    },
+    {
+      icon: "📸",
+      title: "Branding",
+      desc: "High-quality visuals to elevate your real estate brand.",
+      extra: "We help realtors and developers create a cohesive brand identity with professional photos, videos, and design.",
+    },
   ];
 
   const [expanded, setExpanded] = useState(Array(services.length).fill(false));
+  const refs = useRef([]);
 
   const toggleExpand = (index) => {
     const newExpanded = [...expanded];
@@ -36,7 +57,9 @@ const Services = () => {
         `}
       </style>
 
-      <h2 className="relative text-3xl md:text-4xl font-bold mb-12 z-10">Our Services</h2>
+      <h2 className="relative text-3xl md:text-4xl font-bold mb-12 z-10">
+        Our Services
+      </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
         {services.map((service, idx) => (
@@ -48,12 +71,18 @@ const Services = () => {
             <div className="text-4xl mb-4">{service.icon}</div>
             <h3 className="text-xl font-bold mb-2">{service.title}</h3>
             <p>{service.desc}</p>
-            
-            {/* Smooth slide-down for extra text */}
+
+            {/* Dynamic slide-down */}
             <div
-              className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                expanded[idx] ? "max-h-40 mt-4" : "max-h-0"
-              }`}
+              ref={(el) => (refs.current[idx] = el)}
+              style={{
+                maxHeight: expanded[idx]
+                  ? refs.current[idx]?.scrollHeight + "px"
+                  : "0px",
+                transition: "max-height 0.5s ease-in-out",
+                overflow: "hidden",
+                marginTop: expanded[idx] ? "1rem" : "0",
+              }}
             >
               <p className="text-sm text-gray-600">{service.extra}</p>
             </div>
