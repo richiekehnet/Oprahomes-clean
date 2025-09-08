@@ -48,9 +48,15 @@ const Services = () => {
             <div className="text-4xl mb-4">{service.icon}</div>
             <h3 className="text-xl font-bold mb-2">{service.title}</h3>
             <p>{service.desc}</p>
-            {expanded[idx] && (
-              <p className="mt-4 text-sm text-gray-600">{service.extra}</p>
-            )}
+            
+            {/* Smooth slide-down for extra text */}
+            <div
+              className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                expanded[idx] ? "max-h-40 mt-4" : "max-h-0"
+              }`}
+            >
+              <p className="text-sm text-gray-600">{service.extra}</p>
+            </div>
           </div>
         ))}
       </div>
