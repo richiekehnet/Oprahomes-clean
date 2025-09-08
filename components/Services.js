@@ -11,47 +11,32 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="py-20 px-4 text-center bg-gradient-to-b from-gray-50 via-gray-100 to-gray-50 overflow-hidden"
+      className="py-20 px-4 text-center relative overflow-hidden"
+      style={{
+        background: "linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%)",
+      }}
     >
-      <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
-      {/* Accent line under heading */}
-      <div className="w-24 h-1 bg-red-500 mx-auto mb-12 rounded-full"></div>
-
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        {services.map((service, idx) => (
-          <div
-            key={idx}
-            className="p-6 bg-white shadow-lg rounded-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl"
-            style={{
-              animation: `fadeInUp 0.6s ease forwards`,
-              animationDelay: `${idx * 0.2}s`,
-              opacity: 0,
-            }}
-          >
-            <div className="text-4xl mb-4 transition-transform duration-300 ease-in-out hover:scale-110">
-              {service.icon}
-            </div>
-            <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-            <p>{service.desc}</p>
-          </div>
-        ))}
+      {/* Subtle abstract pattern using pseudo-elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <svg
+          className="w-full h-full"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <pattern
+              id="pattern"
+              x="0"
+              y="0"
+              width="40"
+              height="40"
+              patternUnits="userSpaceOnUse"
+            >
+              <circle cx="1" cy="1" r="1" fill="rgba(0,0,0,0.02)" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#pattern)" />
+        </svg>
       </div>
 
-      {/* Keyframes for fadeInUp */}
-      <style jsx>{`
-        @keyframes fadeInUp {
-          0% {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
-    </section>
-  );
-};
-
-export default Services;
+      <h2 className="relative text-3xl md:text-4xl font-bold mb-12 z-10">Our Services</h2>
