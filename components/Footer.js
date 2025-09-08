@@ -37,7 +37,7 @@ const Footer = () => {
         }`}
       >
         <a
-          href="https://www.instagram.com/yourhandle"
+          href="https://www.instagram.com/oprahomes"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-pink-500 hover:drop-shadow-lg transition-all duration-500"
@@ -45,7 +45,7 @@ const Footer = () => {
           <FaInstagram />
         </a>
         <a
-          href="https://www.tiktok.com/@yourhandle"
+          href="https://www.tiktok.com/@oprahomes"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-black hover:drop-shadow-lg transition-all duration-500"
@@ -53,7 +53,7 @@ const Footer = () => {
           <SiTiktok />
         </a>
         <a
-          href="https://www.youtube.com/@yourhandle"
+          href="https://www.youtube.com/@oprahomes"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-red-600 hover:drop-shadow-lg transition-all duration-500"
