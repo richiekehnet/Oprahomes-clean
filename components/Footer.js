@@ -65,7 +65,7 @@ const Footer = () => {
               iconsVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-6"
-            } hover:text-yellow-400 hover:drop-shadow-[0_0_12px_rgba(255,255,0,0.8)] hover:animate-pulse`}
+            } hover:text-yellow-400 hover:shadow-[0_0_8px_rgba(255,255,0,0.5)] animate-slow-pulse`}
             style={{ transitionDelay: `${idx * 200}ms` }}
           >
             {social.icon}
@@ -74,6 +74,17 @@ const Footer = () => {
       </div>
 
       <p className="mt-6">&copy; {new Date().getFullYear()} Oprahomes. All rights reserved.</p>
+
+      {/* Custom Tailwind animation for slow pulse */}
+      <style jsx>{`
+        @keyframes slow-pulse {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.1); opacity: 0.7; }
+        }
+        .animate-slow-pulse {
+          animation: slow-pulse 2s ease-in-out infinite;
+        }
+      `}</style>
     </footer>
   );
 };
