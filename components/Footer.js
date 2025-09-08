@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="bg-gray-900 text-white py-8 text-center">
       
       {/* Follow Us Text */}
-      <p className="mb-4">Follow us for more cinematic property stories</p>
+      <p className="mb-4 text-sm text-white/70">Follow us for more cinematic property stories</p>
       
       {/* Social Media Icons */}
       <div className="flex justify-center space-x-6 mb-4">
