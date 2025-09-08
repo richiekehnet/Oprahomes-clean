@@ -11,7 +11,7 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="py-20 px-4 text-center bg-gradient-to-r from-gray-50 to-gray-100 overflow-hidden"
+      className="py-20 px-4 text-center bg-gradient-to-b from-gray-50 via-gray-100 to-gray-50 overflow-hidden"
     >
       <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
       {/* Accent line under heading */}
@@ -21,14 +21,14 @@ const Services = () => {
         {services.map((service, idx) => (
           <div
             key={idx}
-            className="p-6 bg-white shadow-lg rounded-lg transition-transform transform hover:scale-105 hover:shadow-2xl"
+            className="p-6 bg-white shadow-lg rounded-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl"
             style={{
               animation: `fadeInUp 0.6s ease forwards`,
               animationDelay: `${idx * 0.2}s`,
               opacity: 0,
             }}
           >
-            <div className="text-4xl mb-4 transition-transform duration-300 ease-in-out hover:scale-110 hover:text-red-500">
+            <div className="text-4xl mb-4 transition-transform duration-300 ease-in-out hover:scale-110">
               {service.icon}
             </div>
             <h3 className="text-xl font-bold mb-2">{service.title}</h3>
