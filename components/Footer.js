@@ -11,7 +11,7 @@ const Footer = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIconsVisible(true);
-            footerObserver.disconnect(); // Trigger only once
+            footerObserver.disconnect();
           }
         });
       },
@@ -53,7 +53,6 @@ const Footer = () => {
         Follow us for more cinematic property stories.
       </p>
 
-      {/* Social Icons */}
       <div className="flex justify-center gap-6 mt-2">
         {socialLinks.map((social, idx) => (
           <a
@@ -65,7 +64,7 @@ const Footer = () => {
               iconsVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-6"
-            } hover:text-yellow-400 hover:shadow-[0_0_8px_rgba(255,255,0,0.5)] animate-slow-pulse`}
+            } hover:shadow-[0_0_8px_rgba(255,255,0,0.5)] animate-slow-pulse hover:animate-shimmer`}
             style={{ transitionDelay: `${idx * 200}ms` }}
           >
             {social.icon}
@@ -75,14 +74,31 @@ const Footer = () => {
 
       <p className="mt-6">&copy; {new Date().getFullYear()} Oprahomes. All rights reserved.</p>
 
-      {/* Custom Tailwind animation for slow pulse */}
       <style jsx>{`
         @keyframes slow-pulse {
           0%, 100% { transform: scale(1); opacity: 1; }
           50% { transform: scale(1.1); opacity: 0.7; }
         }
+
+        @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+
         .animate-slow-pulse {
           animation: slow-pulse 2s ease-in-out infinite;
+        }
+
+        .hover\\:animate-shimmer:hover {
+          animation: shimmer 1.5s linear infinite;
+          background: linear-gradient(
+            90deg,
+            rgba(255,255,255,0.2) 0%,
+            rgba(255,255,255,0.6) 50%,
+            rgba(255,255,255,0.2) 100%
+          );
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
       `}</style>
     </footer>
