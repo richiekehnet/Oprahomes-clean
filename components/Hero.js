@@ -1,12 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const Hero = () => {
   const [animate, setAnimate] = useState(false);
+  const [inView, setInView] = useState(true);
+  const heroRef = useRef(null);
 
   useEffect(() => {
-    // Start animation 1.5s after page load
+    // Initial fade-in after page load
     const timer = setTimeout(() => setAnimate(true), 1500);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    // IntersectionObserver for scroll-triggered animations
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      { threshold: 0.1 } // triggers when 10% of hero is visible
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
+    return () => {
+      if (heroRef.current) observer.unobserve(heroRef.current);
+    };
   }, []);
 
   const scrollToSection = (id) => {
@@ -21,7 +41,10 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+    <section
+      ref={heroRef}
+      className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden"
+    >
       {/* Background Video */}
       <video
         src="/hero.mp4"
@@ -37,7 +60,9 @@ const Hero = () => {
         {/* Headline */}
         <h1
           className={`text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg transform transition-all duration-1000 ease-out ${
-            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+            animate && inView
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-12"
           }`}
         >
           Where the finest homes meet cinematic marketing.
@@ -46,7 +71,9 @@ const Hero = () => {
         {/* Subtext */}
         <p
           className={`text-white text-lg md:text-2xl mb-6 drop-shadow-md transform transition-all duration-1000 ease-out delay-200 ${
-            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+            animate && inView
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-12"
           }`}
         >
           From Calgary to across provinces, Oprahomes elevates every property with cinematic storytelling.
@@ -55,7 +82,9 @@ const Hero = () => {
         {/* Buttons */}
         <div
           className={`flex gap-4 flex-wrap justify-center transform transition-all duration-1000 ease-out delay-400 ${
-            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+            animate && inView
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-12"
           }`}
         >
           <button
