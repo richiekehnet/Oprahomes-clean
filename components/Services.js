@@ -18,7 +18,7 @@ const Services = () => {
       icon: "🚁",
       title: "Drone",
       desc: "Aerial footage showcasing properties cinematically.",
-      extra: "Our drone footage captures unique perspectives of properties, construction projects, ideal for listings and marketing campaigns.",
+      extra: "Our drone footage captures unique perspectives of properties, ideal for listings and marketing campaigns.",
     },
     {
       icon: "📸",
