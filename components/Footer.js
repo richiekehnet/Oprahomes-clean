@@ -1,43 +1,78 @@
 import React, { useEffect, useState } from "react";
-import { FaInstagram, FaFacebook, FaYoutube, FaLinkedin } from "react-icons/fa";
-
-const socialMedia = [
-  { icon: <FaInstagram />, link: "https://www.instagram.com/oprahomes" },
-  { icon: <FaFacebook />, link: "https://www.facebook.com/oprahomes" },
-  { icon: <FaYoutube />, link: "https://www.youtube.com/@oprahomes" },
-  { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/oprahomes" },
-];
+import { FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
-  const [visibleIcons, setVisibleIcons] = useState([]);
+  const [iconsVisible, setIconsVisible] = useState(false);
 
   useEffect(() => {
-    // Staggered fade-in
-    socialMedia.forEach((_, index) => {
-      setTimeout(() => {
-        setVisibleIcons((prev) => [...prev, index]);
-      }, index * 300); // 300ms delay between icons
-    });
+    const footerObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIconsVisible(true);
+            footerObserver.disconnect(); // Only trigger once
+          }
+        });
+      },
+      { threshold: 0.3 } // Trigger when 30% of footer is visible
+    );
+
+    const footerElement = document.getElementById("footer");
+    if (footerElement) {
+      footerObserver.observe(footerElement);
+    }
+
+    return () => footerObserver.disconnect();
   }, []);
 
+  const socialLinks = [
+    {
+      icon: <FaInstagram />,
+      url: "https://www.instagram.com/oprahomes/",
+      name: "Instagram",
+    },
+    {
+      icon: <FaFacebookF />,
+      url: "https://www.facebook.com/oprahomes",
+      name: "Facebook",
+    },
+    {
+      icon: <FaLinkedinIn />,
+      url: "https://www.linkedin.com/company/oprahomes",
+      name: "LinkedIn",
+    },
+  ];
+
   return (
-    <footer className="bg-gray-900 text-white py-8 text-center">
-      <p>&copy; {new Date().getFullYear()} Oprahomes. All rights reserved.</p>
-      <div className="flex justify-center mt-4 space-x-6">
-        {socialMedia.map((item, index) => (
+    <footer
+      id="footer"
+      className="bg-gray-900 text-white py-8 text-center relative overflow-hidden"
+    >
+      <p className="mb-4 text-lg">
+        Follow us for more cinematic property stories.
+      </p>
+
+      {/* Social Icons */}
+      <div className="flex justify-center gap-6 mt-2">
+        {socialLinks.map((social, idx) => (
           <a
-            key={index}
-            href={item.link}
+            key={social.name}
+            href={social.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`text-2xl transition-opacity duration-1000 ${
-              visibleIcons.includes(index) ? "opacity-100" : "opacity-0"
-            } hover:text-yellow-500`}
+            className={`text-2xl transition-all duration-700 ease-out transform ${
+              iconsVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-6"
+            } hover:text-yellow-400 hover:drop-shadow-[0_0_8px_rgba(255,255,0,0.7)]`}
+            style={{ transitionDelay: `${idx * 200}ms` }} // staggered fade
           >
-            {item.icon}
+            {social.icon}
           </a>
         ))}
       </div>
+
+      <p className="mt-6">&copy; {new Date().getFullYear()} Oprahomes. All rights reserved.</p>
     </footer>
   );
 };
