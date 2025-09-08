@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import { FaInstagram, FaYoutube } from "react-icons/fa";
+import { SiTiktok } from "react-icons/si";
 
 const Footer = () => {
   const [iconsVisible, setIconsVisible] = useState(false);
@@ -10,11 +11,11 @@ const Footer = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIconsVisible(true);
-            footerObserver.disconnect(); // Only trigger once
+            footerObserver.disconnect(); // Trigger only once
           }
         });
       },
-      { threshold: 0.3 } // Trigger when 30% of footer is visible
+      { threshold: 0.3 }
     );
 
     const footerElement = document.getElementById("footer");
@@ -32,14 +33,14 @@ const Footer = () => {
       name: "Instagram",
     },
     {
-      icon: <FaFacebookF />,
-      url: "https://www.facebook.com/oprahomes",
-      name: "Facebook",
+      icon: <SiTiktok />,
+      url: "https://www.tiktok.com/@oprahomes",
+      name: "TikTok",
     },
     {
-      icon: <FaLinkedinIn />,
-      url: "https://www.linkedin.com/company/oprahomes",
-      name: "LinkedIn",
+      icon: <FaYoutube />,
+      url: "https://www.youtube.com/@oprahomes",
+      name: "YouTube",
     },
   ];
 
@@ -64,8 +65,8 @@ const Footer = () => {
               iconsVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-6"
-            } hover:text-yellow-400 hover:drop-shadow-[0_0_8px_rgba(255,255,0,0.7)]`}
-            style={{ transitionDelay: `${idx * 200}ms` }} // staggered fade
+            } hover:text-yellow-400 hover:drop-shadow-[0_0_12px_rgba(255,255,0,0.8)] hover:animate-pulse`}
+            style={{ transitionDelay: `${idx * 200}ms` }}
           >
             {social.icon}
           </a>
