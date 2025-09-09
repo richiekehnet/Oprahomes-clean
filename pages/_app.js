@@ -5,28 +5,34 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Oprahomes | Where the finest homes meet cinematic marketing</title>
-        <meta
-          name="description"
-          content="Where Calgary's finest homes meet cinematic marketing. Videography, drone, buying/selling, branding."
-        />
-
-        {/* Open Graph */}
-        <meta property="og:title" content="Oprahomes | Where the finest homes meet cinematic marketing" />
-        <meta property="og:description" content="Cinematic marketing for Calgary real estate. Videography, drone, buying/selling, branding." />
-        <meta property="og:image" content="https://oprahomes.ca/preview-image.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:url" content="https://oprahomes.ca" />
-        <meta property="og:type" content="website" />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Oprahomes | Where the finest homes meet cinematic marketing" />
-        <meta name="twitter:description" content="Cinematic marketing for Calgary real estate. Videography, drone, buying/selling, branding." />
-        <meta name="twitter:image" content="https://oprahomes.ca/preview-image.png" />
-
+        {/* Page Title & Meta */}
+        <title>Oprahomes | Where the Finest Homes Meet Cinematic Marketing</title>
+        <meta name="description" content="Where Calgary's finest homes meet cinematic marketing. Videography, drone, buying/selling, branding." />
         <meta name="robots" content="index, follow" />
+
+        {/* Favicon */}
+        <link rel="icon" type="image/png" href="/preview-image.png" />
+        <link rel="apple-touch-icon" href="/preview-image.png" />
+
+        {/* Open Graph / Facebook / Instagram */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Oprahomes | Where the Finest Homes Meet Cinematic Marketing" />
+        <meta property="og:description" content="Cinematic real estate videos, drone footage, branding, and expert buying/selling guidance in Calgary." />
+        <meta property="og:image" content="https://oprahomes.ca/preview-image.png" />
+        <meta property="og:url" content="https://oprahomes.ca" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Oprahomes | Where the Finest Homes Meet Cinematic Marketing" />
+        <meta name="twitter:description" content="Cinematic real estate videos, drone footage, branding, and expert buying/selling guidance in Calgary." />
+        <meta name="twitter:image" content="https://oprahomes.ca/preview-image.png" />
+        <meta name="twitter:site" content="@oprahomes" />
+
+        {/* TikTok / Other Social */}
+        <meta name="tiktok:card" content="summary_large_image" />
+        <meta name="tiktok:title" content="Oprahomes | Where the Finest Homes Meet Cinematic Marketing" />
+        <meta name="tiktok:description" content="Cinematic real estate videos, drone footage, branding, and expert buying/selling guidance in Calgary." />
+        <meta name="tiktok:image" content="https://oprahomes.ca/preview-image.png" />
 
         {/* Structured Data */}
         <script
@@ -37,7 +43,7 @@ export default function App({ Component, pageProps }) {
               "@type": "RealEstateAgent",
               "name": "Oprahomes",
               "url": "https://oprahomes.ca",
-              "logo": "https://oprahomes.ca/logo.png",
+              "logo": "https://oprahomes.ca/preview-image.png",
               "sameAs": [
                 "https://www.instagram.com/oprahomes",
                 "https://www.youtube.com/@oprahomes",
