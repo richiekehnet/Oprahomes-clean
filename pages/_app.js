@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
         <title>Oprahomes | Calgary Real Estate & Videography</title>
         <meta
           name="description"
-          content="Where Calgary's finest homes meet cinematic marketing. Videography, drone, buying/selling, branding."
+          content="Where the finest homes meet cinematic marketing. Videography, drone, buying/selling, branding."
         />
         <meta name="robots" content="index, follow" />
 
@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }) {
         <meta property="og:title" content="Oprahomes | Calgary Real Estate & Videography" />
         <meta
           property="og:description"
-          content="Where Calgary's finest homes meet cinematic marketing. Videography, drone, buying/selling, branding."
+          content="Where the finest homes meet cinematic marketing. Videography, drone, buying/selling, branding."
         />
         <meta property="og:image" content="https://oprahomes.ca/preview-image.png" />
 
@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }) {
         <meta property="twitter:title" content="Oprahomes | Calgary Real Estate & Videography" />
         <meta
           property="twitter:description"
-          content="Where Calgary's finest homes meet cinematic marketing. Videography, drone, buying/selling, branding."
+          content="Where the finest homes meet cinematic marketing. Videography, drone, buying/selling, branding."
         />
         <meta property="twitter:image" content="https://oprahomes.ca/preview-image.png" />
 
