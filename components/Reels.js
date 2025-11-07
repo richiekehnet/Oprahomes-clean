@@ -1,12 +1,11 @@
 import React, { useRef } from "react";
 
 const reels = [
-  { id: 1, src: "/reel-1.mp4" },
+  { id: 1, src: "/reel-4.mp4" },
   { id: 2, src: "/reel-2.mp4" },
-  { id: 3, src: "/reel-3.mp4" },
-  { id: 4, src: "/reel-4.mp4" },
+  { id: 3, src: "/reel-1.mp4" },
+  { id: 4, src: "/reel-3.mp4" },
   { id: 7, src: "/reel-7.mp4" },
-  { id: 5, src: "/reel-5.mp4" },
   { id: 6, src: "/reel-6.mp4" }, // Add more manually if needed
 ];
 
