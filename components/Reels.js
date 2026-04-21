@@ -2,9 +2,9 @@ import React, { useRef } from "react";
 
 const reels = [
   { id: 1, src: "/reel-4.mp4" },
-  { id: 2, src: "/reel-3.mp4" },
+  { id: 2, src: "/reel-2.mp4" },
   { id: 3, src: "/reel-1.mp4" },
-  { id: 4, src: "/reel-2.mp4" },
+  { id: 4, src: "/reel-3.mp4" },
   { id: 7, src: "/reel-7.mp4" },
   { id: 6, src: "/reel-6.mp4" }, // Add more manually if needed
 ];
@@ -56,7 +56,7 @@ const Reels = () => {
           providing buyers and sellers with an immersive property experience.
           Additionally, we assist construction companies in tracking project
           progress with consistent aerial footage, giving a clear view of every
-          stage of development.
+          stage of development process.
         </p>
 
         {/* Desktop Horizontal Scroll */}
